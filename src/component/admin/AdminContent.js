@@ -35,8 +35,10 @@ class AdminContent extends React.Component {
                                     <thead>
                                         <tr>
                                             <th style={{ width: 10 }}>#</th>
-                                            <th>Task</th>
-                                            <th>Progress</th>
+                                            <th>Tên người dùng</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Email</th>
+                                            <th>Quyền</th>
                                             <th style={{ width: 40 }}>Thao tác</th>
                                         </tr>
                                     </thead>
@@ -45,32 +47,13 @@ class AdminContent extends React.Component {
                                             <td>1.</td>
                                             <td>Update software</td>
                                             <td>
-                                                <div className="progress progress-xs">
-                                                    <div
-                                                        className="progress-bar progress-bar-danger"
-                                                        style={{ width: "55%" }}
-                                                    />
-                                                </div>
+                                                567890
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-default">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-default">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
+                                                gygygyg@mail.com
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Clean database</td>
                                             <td>
-                                                <div className="progress progress-xs">
-                                                    <div
-                                                        className="progress-bar bg-warning"
-                                                        style={{ width: "70%" }}
-                                                    />
-                                                </div>
+                                                Hiệu trưởng
                                             </td>
                                             <td>
                                             <button type="button" class="btn btn-default">
@@ -81,46 +64,7 @@ class AdminContent extends React.Component {
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Cron job running</td>
-                                            <td>
-                                                <div className="progress progress-xs progress-striped active">
-                                                    <div
-                                                        className="progress-bar bg-primary"
-                                                        style={{ width: "30%" }}
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td>
-                                            <button type="button" class="btn btn-default">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-default">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4.</td>
-                                            <td>Fix and squish bugs</td>
-                                            <td>
-                                                <div className="progress progress-xs progress-striped active">
-                                                    <div
-                                                        className="progress-bar bg-success"
-                                                        style={{ width: "90%" }}
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td>
-                                            <button type="button" class="btn btn-default">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-default">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
