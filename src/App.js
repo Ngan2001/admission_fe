@@ -1,23 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
-
+import Header from './component/layouts/Header';
+import Banner from './component/layouts/Banner';
+import Content from './component/layouts/Content';
+import AdminContent from './component/admin/AdminContent';
+import AdminSidebar from './component/admin/AdminSidebar';
+import AdminHeader from './component/admin/AdminHeader';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      
+      <AdminHeader />
+      <AdminContent/>
+      <AdminSidebar/>
+
+
+      {/* <Header />
+       <Banner />
+       <Content /> */}
     </div>
   );
 }
