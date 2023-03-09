@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Register from "./Register";
+import Login from "./Login";
+import { Outlet, Link } from "react-router-dom";
 export default class Header extends Component {
     
     render() {
@@ -10,9 +13,9 @@ export default class Header extends Component {
         }
         return (
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid" style={{background: '#1150a0'}}>
+                <div className="container-fluid" style={{ background: '#1150a0' }}>
                     <a className="navbar-brand" href="#">
-                    <img  style={{height:'50px', width:'50px'}} src="assets/images/school-logo.png" className="d-block w-100" alt="..." />
+                        <img style={{ height: '50px', width: '50px' }} src="assets/images/school-logo.png" className="d-block w-100" alt="..." />
                     </a>
                     <button
                         className="navbar-toggler"
@@ -70,7 +73,7 @@ export default class Header extends Component {
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
-                            <input
+                            {/* <input
                                 className="form-control me-2 w-25"
                                 type="search"
                                 placeholder="Search"
@@ -78,13 +81,10 @@ export default class Header extends Component {
                             />
                             <button className="btn btn-outline-success" type="submit" style={buttonCSS}>
                                 Search
-                            </button>
-                            <button className="btn btn-outline-success" type="button" style={buttonCSS}>
-                                Đăng nhập
-                            </button>
-                            <button className="btn btn-outline-success" type="button" style={buttonCSS}>
-                                Đăng ký
-                            </button>
+                            </button> */}
+
+                            <Link className="btn btn-outline-success" style={buttonCSS} to="/login">Đăng nhập</Link>
+                            <Link className="btn btn-outline-success" style={buttonCSS} to="/register">Đăng ký</Link>
                         </form>
                     </div>
                 </div>

@@ -109,7 +109,7 @@ class AdminHeader extends React.Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" role="button">
-                <i class="fas fa-bed"></i>
+                <i className="fas fa-bed"></i>
                 </a>
               </li>
             </ul>

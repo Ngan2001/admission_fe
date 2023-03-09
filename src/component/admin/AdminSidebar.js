@@ -29,7 +29,7 @@ class AdminSidebar extends React.Component {
 
                             <li className="nav-item">
                                 <a href="pages/kanban.html" className="nav-link">
-                                <i class="nav-icon fas fa-user "></i>
+                                <i className="nav-icon fas fa-user "></i>
                                     <p>
                                         Tài khoản
                                     </p>

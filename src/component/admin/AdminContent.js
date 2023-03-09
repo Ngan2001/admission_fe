@@ -25,8 +25,8 @@ class AdminContent extends React.Component {
                             <div className="card-header">
                                 <h3 className="card-title">Bordered Table</h3>
 
-                                <button type="button" className="btn btn-primary btn-block" style={{width: '200px', float: 'right'}}>
-                                <i class="fas fa-utensil-spoon"></i> Thêm mới
+                                <button type="button" className="btn btn-primary btn-block" style={{ width: '200px', float: 'right' }}>
+                                    <i className="fas fa-utensil-spoon"></i> Thêm mới
                                 </button>
 
                             </div>
@@ -56,15 +56,15 @@ class AdminContent extends React.Component {
                                                 Hiệu trưởng
                                             </td>
                                             <td>
-                                            <button type="button" class="btn btn-default">
-                                                    <i class="fas fa-pencil-alt"></i>
+                                                <button type="button" className="btn btn-default">
+                                                    <i className="fas fa-pencil-alt"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-default">
-                                                    <i class="far fa-trash-alt"></i>
+                                                <button type="button" className="btn btn-default">
+                                                    <i className="far fa-trash-alt"></i>
                                                 </button>
                                             </td>
                                         </tr>
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
