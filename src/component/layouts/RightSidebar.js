@@ -15,7 +15,8 @@ export default class RightSidebar extends Component {
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
-                                <h5 className="card-title">Câu hỏi thường gặp</h5>
+                            
+                                <h5 className="card-title"><a href="faq">Câu hỏi thường gặp</a></h5>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,7 @@ export default class RightSidebar extends Component {
                     <img src="assets/images/livestream.jpg" className="card-img-top" alt="livestream" />
                     <div className="card-body">
                         <p className="card-text">
-                            Lịch livestream
+                            <a href="livestream">Lịch livestream</a>
                         </p>
                     </div>
                 </div>
