@@ -63,7 +63,7 @@ export default class Header extends Component {
                                     </li>
                                     <li>
                                         <a className="dropdown-item" href="#">
-                                            Something else here test
+                                            Something else here
                                         </a>
                                     </li>
                                 </ul>
