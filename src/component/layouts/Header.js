@@ -19,7 +19,7 @@ export default class Header extends Component {
             fontWeight: '400',
         }
         return (
-            <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{padding: 0}}>
+            <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{ padding: 0 }}>
                 <div className="container-fluid" style={{ background: '#1150a0' }}>
                     <a className="navbar-brand" href="/">
                         <img style={{ height: '90px', width: '120px' }} src="assets/images/school-logo.png" className="d-block w-100" alt="..." />
@@ -52,6 +52,24 @@ export default class Header extends Component {
                             <Link className="btn btn-outline-primary" style={buttonCSS} to="/login">Đăng nhập</Link>
                             <Link className="btn btn-outline-primary" style={buttonCSS} to="/register">Đăng ký</Link>
                         </form>
+                        <img src="admin-lte/dist/img/user3-128x128.jpg" class="rounded-circle" alt="..." style={{ height: '40px', width: '40px' }}></img>
+                        {/* <a href="#" class="link-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Nguyễn Thị Kim Ngân</a> */}
+                        <div className="dropdown">
+                            <button
+                                className="btn dropdown-toggle border-0 text-white"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false" >
+                                Nguyễn Thị Kim Ngân
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <a className="dropdown-item" href="#">
+                                        Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>
