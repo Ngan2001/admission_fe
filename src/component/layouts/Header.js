@@ -3,7 +3,7 @@ import Register from "./Register";
 import Login from "./Login";
 import { Outlet, Link } from "react-router-dom";
 export default class Header extends Component {
-    
+
     render() {
         const buttonCSS = {
             width: '200px',
@@ -11,11 +11,18 @@ export default class Header extends Component {
             background: 'white',
             marginLeft: '10px'
         }
+
+        const brandTxt = {
+            color: '#fff',
+            textTransform: 'uppercase',
+            fontSize: '20px',
+            fontWeight: '400',
+        }
         return (
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{padding: 0}}>
                 <div className="container-fluid" style={{ background: '#1150a0' }}>
-                    <a className="navbar-brand" href="#">
-                        <img style={{ height: '50px', width: '50px' }} src="assets/images/school-logo.png" className="d-block w-100" alt="..." />
+                    <a className="navbar-brand" href="/">
+                        <img style={{ height: '90px', width: '120px' }} src="assets/images/school-logo.png" className="d-block w-100" alt="..." />
                     </a>
                     <button
                         className="navbar-toggler"
@@ -29,50 +36,9 @@ export default class Header extends Component {
                         <span className="navbar-toggler-icon" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">
-                                    Home
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    Link
-                                </a>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a
-                                    className="nav-link dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    Dropdown
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            Action
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            Another action
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <hr className="dropdown-divider" />
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                            Something else here
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <form className="d-flex" role="search">
+                        <span style={brandTxt} >Cổng thông tin tuyển sinh<br />
+                            Trường Đại học Mở Thành phố Hồ Chí Minh</span>
+                        <form className="ms-auto" role="search">
                             {/* <input
                                 className="form-control me-2 w-25"
                                 type="search"
@@ -83,8 +49,8 @@ export default class Header extends Component {
                                 Search
                             </button> */}
 
-                            <Link className="btn btn-outline-success" style={buttonCSS} to="/login">Đăng nhập</Link>
-                            <Link className="btn btn-outline-success" style={buttonCSS} to="/register">Đăng ký</Link>
+                            <Link className="btn btn-outline-primary" style={buttonCSS} to="/login">Đăng nhập</Link>
+                            <Link className="btn btn-outline-primary" style={buttonCSS} to="/register">Đăng ký</Link>
                         </form>
                     </div>
                 </div>

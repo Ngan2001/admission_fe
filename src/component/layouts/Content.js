@@ -12,102 +12,60 @@ export default class Content extends Component {
         }
         return (
             <>
-                <div className="accordion" id="accordionExample">
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingOne">
-                            <button
-                                className="accordion-button"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne"
-                                aria-expanded="true"
-                                aria-controls="collapseOne"
-                            >
-                                Hệ chính quy
-                            </button>
-                        </h2>
-                        <div
-                            id="collapseOne"
-                            className="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <div className="accordion-body">
-                                <ul className="list-group list-group-horizontal-xxl">
-                                    <li className="list-group-item"><a href="#">Thông tin các loại tài khoản Văn bằng 2, Liên thông CĐ-ĐH, Khóa 2021</a></li>
-                                    <li className="list-group-item"><a href="#">Thủ tục nhập học Tân sinh viên Văn bằng 2 - Liên thông Khóa 2021</a></li>
-                                    <li className="list-group-item"><a href="#">Kết quả tuyển sinh ĐH Văn bằng 2, Liên thông CĐ-ĐH năm 2021</a></li>
-                                    <li className="list-group-item text-center">
-                                        <Link className="list-group-item text-center" to="admission">Xem tất cả</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingTwo">
-                            <button
-                                className="accordion-button collapsed"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo"
-                                aria-expanded="false"
-                                aria-controls="collapseTwo"
-                            >
-                                Hệ liên thông
-                            </button>
-                        </h2>
-                        <div
-                            id="collapseTwo"
-                            className="accordion-collapse collapse"
-                            aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <div className="accordion-body">
-                                <strong>This is the second item's accordion body.</strong> It is hidden
-                                by default, until the collapse plugin adds the appropriate classes that
-                                we use to style each element. These classes control the overall
-                                appearance, as well as the showing and hiding via CSS transitions. You
-                                can modify any of this with custom CSS or overriding our default
-                                variables. It's also worth noting that just about any HTML can go within
-                                the <code>.accordion-body</code>, though the transition does limit
-                                overflow.
-                            </div>
-                        </div>
-                    </div>
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingThree">
-                            <button
-                                className="accordion-button collapsed"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree"
-                                aria-expanded="false"
-                                aria-controls="collapseThree"
-                            >
-                                Cao học
-                            </button>
-                        </h2>
-                        <div
-                            id="collapseThree"
-                            className="accordion-collapse collapse"
-                            aria-labelledby="headingThree"
-                            data-bs-parent="#accordionExample"
-                        >
-                            <div className="accordion-body">
-                                <strong>This is the third item's accordion body.</strong> It is hidden
-                                by default, until the collapse plugin adds the appropriate classes that
-                                we use to style each element. These classes control the overall
-                            </div>
-                        </div>
-                    </div>
+                <h1 className="text-uppercase text-primary mt-3 mb-5">THÔNG TIN TUYỂN SINH</h1>
+
+                <div className="text-uppercase text-primary mt-3 mb-2 fs-4">Hệ chính quy
+                
+                <Link className="float-end fs-6" to="admission">Xem tất cả	&#x3E;&#x3E;</Link>
                 </div>
 
+                <ul className="list-group list-geeeeeeeeeroup-flush">
+                    <li className="list-group-item d-flex flex-row align-items-center" style={{height: '60px', padding: '0'}}>
+                        <div className="flex-shrink-1">
+                            <img style={{height: '55px', width:'55px'}} src="assets/images/question.jpg" className="img-fluid rounded-start" alt="..." />
+                        </div>
+                        <div className="">
+                           <span>Tổng hợp thông tin Tuyển sinh ĐHCQ năm 2022</span>
+                        </div>
+                    </li>
+
+                    <li className="list-group-item d-flex flex-row align-items-center" style={{height: '60px', padding: '0'}}>
+                        <div className="flex-shrink-1">
+                            <img style={{height: '55px', width:'55px'}} src="assets/images/question.jpg" className="img-fluid rounded-start" alt="..." />
+                        </div>
+                        <div className="">
+                           <span>Thông báo tiếp nhận Tân sinh viên Khóa 2022</span>
+                        </div>
+                    </li>
+
+                    <li className="list-group-item d-flex flex-row align-items-center" style={{height: '60px', padding: '0'}}>
+                        <div className="flex-shrink-1">
+                            <img style={{height: '55px', width:'55px'}} src="assets/images/question.jpg" className="img-fluid rounded-start" alt="..." />
+                        </div>
+                        <div className="">
+                           <span>Tổng hợp thông tin Tuyển sinh ĐHCQ năm 2022</span>
+                        </div>
+                    </li>
+
+                    <li className="list-group-item d-flex flex-row align-items-center" style={{height: '60px', padding: '0'}}>
+                        <div className="flex-shrink-1">
+                            <img style={{height: '55px', width:'55px'}} src="assets/images/question.jpg" className="img-fluid rounded-start" alt="..." />
+                        </div>
+                        <div className="">
+                           <span>Thông báo về thời gian công bố kết quả tuyển sinh và thủ tục nhập học</span>
+                        </div>
+                    </li>
+
+                    <li className="list-group-item d-flex flex-row align-items-center" style={{height: '60px', padding: '0'}}>
+                        <div className="flex-shrink-1">
+                            <img style={{height: '55px', width:'55px'}} src="assets/images/question.jpg" className="img-fluid rounded-start" alt="..." />
+                        </div>
+                        <div className="">
+                           <span>Thông báo v/v Ngưỡng điểm nhận hồ sơ đăng ký xét tuyển kết quả thi tốt nghiệp</span>
+                        </div>
+                    </li>
+                </ul>
             </>
-
-
-
-
         )
     }
 }

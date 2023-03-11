@@ -7,15 +7,15 @@ export default class Banner extends Component {
                 className="carousel slide"
                 data-bs-ride="carousel"
             >
-                <div className="carousel-inner" style={{height:'250px'}}>
-                    <div className="carousel-item active" data-bs-interval={10000}>
-                        <img  style={{height:'250px'}} src="assets/images/dore-banner1.jpg" className="d-block w-100" alt="..." />
+                <div className="carousel-inner" style={{height:'475px'}}>
+                    <div className="carousel-item active" data-bs-interval={8000}>
+                        <img  style={{height:'475px'}} src="assets/images/banner-1.png" className="d-block w-100" alt="..." />
                     </div>
                     <div className="carousel-item" data-bs-interval={2000}>
-                        <img  style={{height:'250px'}} src="assets/images/dore-banner2.png" className="d-block w-100" alt="..." />
+                        <img  style={{height:'475px'}} src="assets/images/banner-2.png" className="d-block w-100" alt="..." />
                     </div>
                     <div className="carousel-item">
-                        <img  style={{height:'250px'}} src="assets/images/dore-banner1.jpg" className="d-block w-100" alt="..." />
+                        <img  style={{height:'475px'}} src="assets/images/banner-3.png" className="d-block w-100" alt="..." />
                     </div>
                 </div>
                 <button
