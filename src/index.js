@@ -40,12 +40,27 @@ root.render(
             <Route path="" element={<FAQIndex />} />
             <Route path="question" element={<QuestionForm />} />
           </Route>
+    {/* <App/> */}
+    {/* <BrowserRouter> */}
+      {/* <Routes>
+                <Route index element={<App />} /> */}
+
+
+
+        {/* <Route path="" element={<App />}>
+          <Route path="/department" element={<DepartmentIndex />}/>
         </Route>
         <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="register" element={<Register />} /> */}
 
       </Routes>
     </BrowserRouter>
+
+
+
+
+      {/* </Routes>
+    </BrowserRouter> */}
   </React.StrictMode>
 );
 

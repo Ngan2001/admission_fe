@@ -1,26 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router";
 
-export default function AdminContent() {  
-        return (
+export default function IndexQuestions(){
+    
+        return(
             <div className="content-wrapper">
-                <div className="content-header">
-                    <div className="container-fluid">
-                        <div className="row mb-2">
-                            <div className="col-sm-6">
-                                <h1 className="m-0">Danh sách tài khoản</h1>
-                            </div>
-                            <div className="col-sm-6">
-                                <ol className="breadcrumb float-sm-right">
-                                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li className="breadcrumb-item active">Dashboard v1</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <section className="content">
-                    <div className="container-fluid">
-                        <div className="card">
+                <h1>Nơi đặt câu hỏi</h1>
+                <div className="card">
                             <div className="card-header">
                                 <h3 className="card-title">Bordered Table</h3>
 
@@ -97,10 +83,8 @@ export default function AdminContent() {
                                 </ul>
                             </div>
                         </div>
-
-
-                    </div>
-                </section>
+                <Outlet />
             </div>
         )
+    
 }

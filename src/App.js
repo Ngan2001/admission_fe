@@ -6,10 +6,9 @@ import Content from './component/layouts/Content';
 import AdminContent from './component/admin/AdminContent';
 import AdminSidebar from './component/admin/AdminSidebar';
 import AdminHeader from './component/admin/AdminHeader';
-import { BrowserRouter } from 'react-router-dom';
-import { Routes, Route } from 'react-router';
-import AdmissionIndex from './component/admin/admin-modules/admissions/AdmissionIndex'
-import AdmissionCreate from './component/admin/admin-modules/admissions/AdmissionCreate'
+
+import AdmissionIndex from './component/admin/admin-modules/admissions-admission/IndexAdmission';
+import AdmissionCreate from './component/admin/admin-modules/admissions-admission/CreateAdmission';
 import Footer from './component/layouts/Footer';
 import Login from './component/layouts/Login';
 import Register from './component/layouts/Register';
@@ -17,6 +16,24 @@ import DepartmentIndex from './component/department/DepartmentIndex';
 import { Outlet } from "react-router-dom";
 import RightSidebar from './component/layouts/RightSidebar';
 
+import { BrowserRouter } from 'react-router-dom';
+import { Routes, Route, Router } from 'react-router';
+import Create from './component/admin/admin-modules/admission-type/CreateType';
+import Index from './component/admin/admin-modules/admission-type/IndexType';
+import CreateNews from './component/admin/admin-modules/admision-news/CreateNews';
+import IndexBanner from './component/admin/admin-modules/admission-banner/IndexBanner';
+import CreateBanner from './component/admin/admin-modules/admission-banner/CreateBanner';
+import IndexSchool from './component/admin/admin-modules/admission-school/IndexSchool';
+import CreateSchool from './component/admin/admin-modules/admission-school/CreateSchool';
+import IndexNews from './component/admin/admin-modules/admision-news/IndexNews';
+import IndexType from './component/admin/admin-modules/admission-type/IndexType';
+import CreateType from './component/admin/admin-modules/admission-type/CreateType';
+import IndexQuestions from './component/admin/admin-modules/admision-questions/IndexQuestions';
+import CreateQuetions from './component/admin/admin-modules/admision-questions/CreateQuestions';
+import IndexComment from './component/admin/admin-modules/admision-comment/IndexComment';
+import CreateComment from './component/admin/admin-modules/admision-comment/CreateComment';
+import IndexAdmission from './component/admin/admin-modules/admissions-admission/IndexAdmission';
+import CreateAdmission from './component/admin/admin-modules/admissions-admission/CreateAdmission';
 
 function App() {
   const chatBoxCss = {
@@ -26,21 +43,49 @@ function App() {
 }
   return (
     <div>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
-          <Route path="/user" element={<AdmissionIndex />}>
-            <Route path="user-create" element={<AdmissionCreate />} />
+          <Route exact path="/user" element={<IndexAdmission />}>
+            <Route path="create" element={<CreateAdmission />} />
           </Route>
+
+          <Route exact path="/school" element={<IndexSchool />}>
+            <Route path="create" element={<CreateSchool />} />
+          </Route>
+
+          <Route exact path="/admission-type" element={<IndexType />}>
+            <Route path="create" element={<CreateType />}></Route>
+          </Route>
+
+          <Route exact path='/admission-news' element={<IndexNews />}>
+            <Route path='create' element={<CreateNews />}></Route>
+          </Route>
+
+          <Route exact path='/admission-banner' element={<IndexBanner />}>
+            <Route path='create' element={<CreateBanner />}></Route>
+          </Route>
+
+          <Route exact path='/admission-questions' element={<IndexQuestions />}>
+            <Route path='create' element={<CreateQuetions />}></Route>
+          </Route>
+
+          <Route exact path='/admission-questions' element={<IndexComment />}>
+            <Route path='create' element={<CreateComment />}></Route>
+          </Route>
+
           <Route path="/login" element={<Login />}></Route>
+
         </Routes>
-      </BrowserRouter> */}
+
+
+      </BrowserRouter>
 
       {/* <AdminHeader />
       <AdminContent />
       <AdminSidebar /> */}
 
 
-      <Header />
+      {/* <Header />
       <Banner />
 
       <div className="">
@@ -168,6 +213,8 @@ function App() {
       
 
       <Footer />
+      <Content />
+      <Footer /> */}
     </div>
   );
 }
