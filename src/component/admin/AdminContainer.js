@@ -8,7 +8,7 @@ export default function AdminContainer() {
             <>
                 <AdminHeader />
                 <AdminSidebar />
-                <AdminContent />
+                {/* <AdminContent /> */}
                 <Outlet/>
             </>
         )

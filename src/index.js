@@ -17,6 +17,8 @@ import LivestreamDetail from './component/livestream/LivestreamDetail';
 import FAQIndex from './component/faq/FAQIndex';
 import QuestionForm from './component/faq/QuestionForm';
 import AdminContainer from './component/admin/AdminContainer';
+import IndexUser from './component/admin/admin-modules/admission-user/IndexUser';
+import CreateUser from './component/admin/admin-modules/admission-user/CreatUser';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -43,7 +45,14 @@ root.render(
           </Route>
         </Route>
 
-        <Route path="admin" element={<AdminContainer />} />
+        <Route path="admin" element={<AdminContainer />}>
+          <Route path="user">
+            <Route path="" element={<IndexUser />}/>
+            <Route path="create" element={<CreateUser />}/>
+          </Route>
+        </Route>
+
+
         <Route path="admin-login" element={<Login />} />
 
       </Routes>

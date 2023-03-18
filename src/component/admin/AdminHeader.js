@@ -37,7 +37,7 @@ export default function AdminHeader() {
             </div>
           </li>
           <li className="nav-item">
-            <a className="nav-link" role="button">
+            <a className="nav-link" role="button" href="/admin-login">
               Đăng xuất
             </a>
           </li>
