@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-export default class RightSidebar extends Component {
-
-    render() {
+export default function RightSidebar() {
         return (
             <>
                 <div className="card" style={{ width: "100%" }}>
@@ -55,5 +53,4 @@ export default class RightSidebar extends Component {
                 </div>
             </>
         );
-    }
 }

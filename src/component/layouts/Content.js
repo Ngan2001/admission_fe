@@ -3,8 +3,7 @@ import DepartmentIndex from "../department/DepartmentIndex";
 import RightSidebar from "./RightSidebar";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Outlet, Link } from "react-router-dom";
-export default class Content extends Component {
-    render() {
+export default function Content() {
         const chatBoxCss = {
             bottom: '0',
             right: '0',
@@ -67,5 +66,4 @@ export default class Content extends Component {
                 </ul>
             </>
         )
-    }
 }

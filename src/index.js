@@ -16,6 +16,7 @@ import LivestreamIndex from './component/livestream/LivestreamIndex';
 import LivestreamDetail from './component/livestream/LivestreamDetail';
 import FAQIndex from './component/faq/FAQIndex';
 import QuestionForm from './component/faq/QuestionForm';
+import AdminContainer from './component/admin/AdminContainer';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -23,7 +24,7 @@ root.render(
       <Routes>
         {/*         <Route index element={<App />} /> */}
         <Route path="" element={<App />}>
-          <Route path="" element={<Content />}/>
+        <Route path="" element={<Content />} />
           <Route path="department">
             <Route path="" element={<DepartmentIndex />} />
             <Route path="detail" element={<DepartmentDetail />} />
@@ -40,27 +41,13 @@ root.render(
             <Route path="" element={<FAQIndex />} />
             <Route path="question" element={<QuestionForm />} />
           </Route>
-    {/* <App/> */}
-    {/* <BrowserRouter> */}
-      {/* <Routes>
-                <Route index element={<App />} /> */}
-
-
-
-        {/* <Route path="" element={<App />}>
-          <Route path="/department" element={<DepartmentIndex />}/>
         </Route>
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} /> */}
+
+        <Route path="admin" element={<AdminContainer />} />
+        <Route path="admin-login" element={<Login />} />
 
       </Routes>
     </BrowserRouter>
-
-
-
-
-      {/* </Routes>
-    </BrowserRouter> */}
   </React.StrictMode>
 );
 

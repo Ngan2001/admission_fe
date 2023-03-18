@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import Register from "./Register";
 import Login from "./Login";
 import { Outlet, Link } from "react-router-dom";
-export default class Header extends Component {
-
-    render() {
+export default function Header() {
         const buttonCSS = {
             width: '200px',
             height: '40px',
@@ -75,5 +73,4 @@ export default class Header extends Component {
             </nav>
 
         );
-    }
 }

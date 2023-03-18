@@ -43,7 +43,7 @@ function App() {
 }
   return (
     <div>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route exact path="/user" element={<IndexAdmission />}>
             <Route path="create" element={<CreateAdmission />} />
@@ -78,14 +78,14 @@ function App() {
         </Routes>
 
 
-      </BrowserRouter>
+      </BrowserRouter> */}
 
       {/* <AdminHeader />
       <AdminContent />
       <AdminSidebar /> */}
 
 
-      {/* <Header />
+      <Header />
       <Banner />
 
       <div className="">
@@ -205,16 +205,8 @@ function App() {
                             </form>
                         </div>
                     </div>
-
-
                 </div>
-
-       
-      
-
       <Footer />
-      <Content />
-      <Footer /> */}
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-export default class Footer extends Component {
-
-    render() {
+export default function Footer() {
         return (
             <footer className="main-footer" style={{marginLeft: '0px'}}>
                 <strong>
@@ -13,5 +11,4 @@ export default class Footer extends Component {
                 </div>
             </footer>
         );
-    }
 }

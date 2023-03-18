@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-export default class Banner extends Component {
-    render() {
+export default function Banner() {
         return (
             <div
                 id="carouselExampleInterval"
@@ -39,5 +38,4 @@ export default class Banner extends Component {
             </div>
 
         )
-    }
 }

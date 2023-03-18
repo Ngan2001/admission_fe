@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-export default class Register extends Component {
-
-  render() {
+export default function Register() {
     return (
       <div className="register-page" style={{ minHeight: "569.6px" }}>
       <div className="register-box">
@@ -83,5 +81,4 @@ export default class Register extends Component {
       </div>
       </div>
     );
-  }
 }
