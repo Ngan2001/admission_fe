@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import API, { endpoints } from "../../../../API";
 import { Outlet } from "react-router-dom"
 
 export default function IndexUser() {
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        const loadUsers = async () => {
+            await API.get(endpoints["user"]).then(res => {
+                setUsers(res.data)
+            })
+           
+        }
+        loadUsers()
+    }, [])
+
 
     return (
         <div className="content-wrapper">
@@ -22,32 +34,28 @@ export default function IndexUser() {
                                 <th>Số điện thoại</th>
                                 <th>Email</th>
                                 <th>Quyền</th>
-                                <th style={{ width: 40 }}>Thao tác</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>Update software</td>
-                                <td>
-                                    567890
-                                </td>
-                                <td>
-                                    gygygyg@mail.com
-                                </td>
-                                <td>
-                                    Hiệu trưởng
-                                </td>
-                                <td>
-                                    <button type="button" className="btn btn-default">
-                                        <i className="fas fa-pencil-alt"></i>
-                                    </button>
-                                    <button type="button" className="btn btn-default">
-                                        <i className="far fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
+                            {users.map((u, index) =>
+                                <tr key={u.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{u.first_name}</td>
+                                    <td>{u.phone}</td>
+                                    <td>{u.is_superuser == true ? 'Ban tư vấn' : 'Sinh viên'}</td>
+                                    <td>{u.email}</td>
+                                    <td>
+                                        <button type="button" className="btn btn-default mr-2">
+                                            <i className="fas fa-pencil-alt"></i>
+                                        </button>
+                                        <button type="button" className="btn btn-danger">
+                                            <i className="far fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                            }
                         </tbody>
                     </table>
                 </div>
