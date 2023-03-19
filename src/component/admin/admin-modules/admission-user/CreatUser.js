@@ -1,6 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
+import API, { endpoints } from "../../../../API";
 
 export default function CreateUser() {
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [birthday, setBirthday] = useState("")
+    const [phone, setPhone] = useState("")
+    const [email, setEmail] = useState("")
+    const [address, setAddress] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [passwordConfirm, setPasswordConfirm] = useState("")
+    const [avatar, setAvatar] = useState("")
+
+    const createUser = async () => {
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        var img = document.getElementById('blah');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        context.drawImage(img, 0, 0 );
+        var dataURL = canvas.toDataURL("image/png");
+        dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        
+        var myData = dataURL;
+
+        const data = {
+            'first_name': firstName,
+            'last_name': lastName,
+            'birthday_date': birthday,
+            'phone': phone,
+            'email': email,
+            'address': address,
+            username,
+            password,
+            passwordConfirm,
+            'avatar': myData,
+        };
+        
+
+        console.log(myData);
+        console.log(data);
+        const response = await API.post(endpoints["user"], data);
+    }
+    const handleChangeImage = e => {
+        console.log(e);
+        setAvatar(URL.createObjectURL(e.target.files[0]))
+    }
 
     return (
         <div className="content-wrapper">
@@ -10,14 +56,20 @@ export default function CreateUser() {
                 </div>
                 <form>
                     <div className="card-body">
-
+                        <div className="form-group">
+                            <label htmlFor="exampleInputFile">Chọn ảnh</label>
+                            <div className="input-group">
+                                <img id="blah"  alt="your image"  src={avatar} style={{height: '100px', width: '100px',border: '1px solid black', marginRight: '15px'}}/>
+                                <input type="file" onChange={handleChangeImage} />
+                            </div>
+                        </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Họ</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setLastName(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -26,17 +78,14 @@ export default function CreateUser() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setFirstName(e.target.value)}
                             />
                         </div>
                         <div class="form-group">
                             <label>Ngày sinh</label>
                             <div class="input-group">
-                            <input id="startDate" class="form-control" type="date" />
-                                {/* <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                </div>
-                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric"/> */}
+                                <input id="startDate" class="form-control" type="date"
+                                    onChange={(e) => setBirthday(e.target.value)} />
                             </div>
 
                         </div>
@@ -46,7 +95,7 @@ export default function CreateUser() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setAddress(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -55,7 +104,7 @@ export default function CreateUser() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setPhone(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -64,7 +113,7 @@ export default function CreateUser() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -73,7 +122,7 @@ export default function CreateUser() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -82,7 +131,7 @@ export default function CreateUser() {
                                 type="password"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -91,33 +140,15 @@ export default function CreateUser() {
                                 type="password"
                                 className="form-control"
                                 id="exampleInputPassword1"
-
+                                onChange={(e) => setPasswordConfirm(e.target.value)}
                             />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputFile">Chọn ảnh</label>
-                            <div className="input-group">
-                                <div className="custom-file">
-                                    <input
-                                        type="file"
-                                        className="custom-file-input"
-                                        id="exampleInputFile"
-                                    />
-                                    <label className="custom-file-label" htmlFor="exampleInputFile">
-                                        Choose file
-                                    </label>
-                                </div>
-                                <div className="input-group-append">
-                                    <span className="input-group-text">Upload</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div className="card-footer text-center">
                         <a type="button" className="btn btn-primary mr-2" href="/admin/user">
                             Trở về
                         </a>
-                        <button type="submit" className="btn btn-primary">
+                        <button type="button" className="btn btn-primary" onClick={createUser}>
                             Tạo mới
                         </button>
                     </div>
