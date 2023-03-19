@@ -7,9 +7,8 @@ export default function IndexUser() {
     useEffect(() => {
         const loadUsers = async () => {
             await API.get(endpoints["user"]).then(res => {
-                setUsers(res.data)
+                setUsers(res.data.results);
             })
-           
         }
         loadUsers()
     }, [])
