@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import API, { endpoints } from "../../../../API";
-import { Outlet } from "react-router-dom"
+import { useNavigate, useParams } from 'react-router-dom';
+import { Outlet, Link } from "react-router-dom";
 
 export default function IndexUser() {
+    const nav = useNavigate()
     const [users, setUsers] = useState([])
+    const goDetail = (id) => nav(`/admin/user/detail/${id}`)
+
     useEffect(() => {
         const loadUsers = async () => {
             await API.get(endpoints["user"]).then(res => {
@@ -40,7 +44,15 @@ export default function IndexUser() {
                             {users.map((u, index) =>
                                 <tr key={u.id}>
                                     <td>{index + 1}</td>
-                                    <td>{u.first_name}</td>
+                                    <td>
+                                    {/* {u.last_name + ' ' + u.first_name} */}
+                                    <Link className="btn-item auction-btn mr-2" to={`detail/${u.id}`}>
+                                    {u.last_name + ' ' + u.first_name}
+                                    </Link>
+                                        {/* <a className="">
+                                         {u.last_name + ' ' + u.first_name}
+                                        </a> */}
+                                    </td>
                                     <td>{u.phone}</td>
                                     <td>{u.is_superuser == true ? 'Ban tư vấn' : 'Sinh viên'}</td>
                                     <td>{u.email}</td>

@@ -19,6 +19,7 @@ import QuestionForm from './component/faq/QuestionForm';
 import AdminContainer from './component/admin/AdminContainer';
 import IndexUser from './component/admin/admin-modules/admission-user/IndexUser';
 import CreateUser from './component/admin/admin-modules/admission-user/CreatUser';
+import UserDetail from './component/admin/admin-modules/admission-user/UserDetail';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -48,7 +49,8 @@ root.render(
         <Route path="admin" element={<AdminContainer />}>
           <Route path="user">
             <Route path="" element={<IndexUser />}/>
-            <Route path="create" element={<CreateUser />}/>
+            <Route exact path="create" element={<CreateUser />}/>
+            <Route exact path="detail/:userId" element={<UserDetail />}/>
           </Route>
         </Route>
 
