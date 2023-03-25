@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import API, { endpoints } from "../../../../API";
 import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export default function CreateUser() {
     const nav = useNavigate()
@@ -18,13 +20,17 @@ export default function CreateUser() {
     const [avatar, setAvatar] = useState("")
     const [createMessage, setCreateMessage] = useState("")
 
+    const [modalShow, setModalShow] = useState(false);
+    const handleModalClose = () => setModalShow(false);
+    const handleModalShow = () => setModalShow(true);
+
     const createUser = async () => {
         var canvas = document.createElement('canvas');
         var context = canvas.getContext('2d');
         var img = document.getElementById('blah');
         canvas.width = img.width;
         canvas.height = img.height;
-        context.drawImage(img, 0, 0);
+        context.drawImage(img, 0, 0,img.width, img.height);
         var dataURL = canvas.toDataURL("image/png");
         dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 
@@ -42,20 +48,20 @@ export default function CreateUser() {
             passwordConfirm,
             'avatar': myData,
         };
+
         const response = await API.post(endpoints["user"], data).then(res => {
             setCreateMessage('Tạo mới thành công!')
-            $('#modal-btn').click();
+            handleModalShow();
             setTimeout(() => {
-                $('#modal-btn').click();
+                handleModalClose();
                 nav("/admin/user")
             }, 2000);
             
         }).catch(e => {
             setCreateMessage('Tạo mới thất bại!')
-
-            $('#modal-btn').click();
+            handleModalShow();
             setTimeout(() => {
-                $('#modal-btn').click();
+                handleModalClose();
             }, 2000);
         });
     }
@@ -65,6 +71,17 @@ export default function CreateUser() {
 
     return (
         <>
+            <Modal show={modalShow} onHide={handleModalClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Thông báo</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{createMessage}</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleModalClose}>
+                    Đóng
+                </Button>
+                </Modal.Footer>
+            </Modal>
             <div className="content-wrapper">
                 <div className="card card-primary">
                     <div className="card-header">
@@ -97,10 +114,10 @@ export default function CreateUser() {
                                     onChange={(e) => setFirstName(e.target.value)}
                                 />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>Ngày sinh</label>
-                                <div class="input-group">
-                                    <input id="startDate" class="form-control" type="date"
+                                <div className="input-group">
+                                    <input id="startDate" className="form-control" type="date"
                                         onChange={(e) => setBirthday(e.target.value)} />
                                 </div>
 
@@ -173,10 +190,9 @@ export default function CreateUser() {
 
             </div>
 
-            <button id="modal-btn" type="button" class="btn btn-primary  opacity-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button id="modal-btn" type="button" className="btn btn-primary  opacity-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
             </button>
-            {/* Modal */}
             <div
                 className="modal fade"
                 id="exampleModal"
