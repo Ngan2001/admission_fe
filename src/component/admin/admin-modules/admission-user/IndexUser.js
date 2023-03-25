@@ -47,6 +47,12 @@ export default function IndexUser() {
         })
     }
 
+    const goEdit = (userId) => {
+        return() => {
+            nav(`edit/${userId}`);
+        }
+    }
+
     return (
         <div className="content-wrapper">
 
@@ -104,7 +110,7 @@ export default function IndexUser() {
                                     <td>{u.email}</td>
                                     <td>{u.is_superuser == true ? 'Ban tư vấn' : 'Sinh viên'}</td>
                                     <td>
-                                        <button type="button" className="btn btn-default mr-2">
+                                        <button type="button" className="btn btn-default mr-2" onClick={goEdit(u.id)}>
                                             <i className="fas fa-pencil-alt"></i>
                                         </button>
                                         <button type="button" className="btn btn-danger" onClick={handleModalShow(u.id)}>

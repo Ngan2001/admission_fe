@@ -20,6 +20,7 @@ import AdminContainer from './component/admin/AdminContainer';
 import IndexUser from './component/admin/admin-modules/admission-user/IndexUser';
 import CreateUser from './component/admin/admin-modules/admission-user/CreatUser';
 import UserDetail from './component/admin/admin-modules/admission-user/UserDetail';
+import UpdateUser from './component/admin/admin-modules/admission-user/UpdateUser';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -51,6 +52,7 @@ root.render(
             <Route path="" element={<IndexUser />}/>
             <Route exact path="create" element={<CreateUser />}/>
             <Route exact path="detail/:userId" element={<UserDetail />}/>
+            <Route exact path="edit/:userId" element={<UpdateUser />}/>
           </Route>
         </Route>
 
