@@ -37,7 +37,10 @@ export default function UpdateUser() {
                 setEmail(email);
                 setUsername(username);
                 setAvatar(avatar);
-                setBirthday(birthday_date);
+                
+                
+                const parseBirthday = birthday_date.toString().split("T");
+                setBirthday(parseBirthday[0]);
                 setPhone(phone);
             })
         }
@@ -49,7 +52,7 @@ export default function UpdateUser() {
         setAvatar(URL.createObjectURL(e.target.files[0]))
     }
 
-    const updateUser = async () => {
+    const onUpdateUser = async () => {
         var canvas = document.createElement('canvas');
         var context = canvas.getContext('2d');
         var img = document.getElementById('blah');
@@ -74,7 +77,7 @@ export default function UpdateUser() {
             password
         };
 
-        const response = await API.put(endpoints["user"] + `${userId}/`, data).then(res => {
+        await API.put(endpoints["user"] + `${userId}/`, data).then(res => {
             setUpdateMessage('Cập nhật thành công!')
             handleModalShow();
             setTimeout(() => {
@@ -204,7 +207,7 @@ export default function UpdateUser() {
                             <a type="button" className="btn btn-primary mr-2" href="/admin/user" >
                                 Trở về
                             </a>
-                            <button type="button" className="btn btn-primary" onClick={updateUser}>
+                            <button type="button" className="btn btn-primary" onClick={onUpdateUser}>
                                 Cập nhật
                             </button>
                         </div>
