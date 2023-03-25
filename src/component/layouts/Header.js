@@ -50,8 +50,8 @@ export default function Header() {
                             <Link className="btn btn-outline-primary" style={buttonCSS} to="/login">Đăng nhập</Link>
                             <Link className="btn btn-outline-primary" style={buttonCSS} to="/register">Đăng ký</Link>
                         </form>
-                        <img src="admin-lte/dist/img/user3-128x128.jpg" class="rounded-circle" alt="..." style={{ height: '40px', width: '40px' }}></img>
-                        {/* <a href="#" class="link-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Nguyễn Thị Kim Ngân</a> */}
+                        <img src="admin-lte/dist/img/user3-128x128.jpg" className="rounded-circle" alt="..." style={{ height: '40px', width: '40px' }}></img>
+                        {/* <a href="#" className="link-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Nguyễn Thị Kim Ngân</a> */}
                         <div className="dropdown">
                             <button
                                 className="btn dropdown-toggle border-0 text-white"
