@@ -56,7 +56,7 @@ export default function UserDetail() {
                                 <label htmlFor="exampleInputFile">Chọn ảnh</label>
                                 <div className="input-group">
                                     <img id="blah" alt="your image" src={avatar} style={{ height: '100px', width: '100px', border: '1px solid black', marginRight: '15px' }} />
-                                    <input type="file" onChange={handleChangeImage} />
+                                    <input type="file" onChange={handleChangeImage} disabled />
                                 </div>
                             </div>
                             <div className="form-group">
@@ -66,6 +66,7 @@ export default function UserDetail() {
                                     className="form-control"
                                     id="exampleInputPassword1"
                                     value={lastName}
+                                    disabled
                                     onChange={(e) => setLastName(e.target.value)}
                                 />
                             </div>
@@ -76,15 +77,17 @@ export default function UserDetail() {
                                     className="form-control"
                                     id="exampleInputPassword1"
                                     value={firstName}
+                                    disabled
                                     onChange={(e) => setFirstName(e.target.value)}
                                 />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>Ngày sinh</label>
-                                <div class="input-group">
-                                    <input id="startDate" class="form-control" type="date"
+                                <div className="input-group">
+                                    <input id="startDate" className="form-control" type="date"
                                     value={birthday}
-                                        onChange={(e) => setBirthday(e.target.value)} />
+                                    disabled
+                                    onChange={(e) => setBirthday(e.target.value)} />
                                 </div>
 
                             </div>
@@ -94,7 +97,7 @@ export default function UserDetail() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                    value={address}
+                                    value={address} disabled
                                     onChange={(e) => setAddress(e.target.value)}
                                 />
                             </div>
@@ -104,7 +107,7 @@ export default function UserDetail() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                    value={phone}
+                                    value={phone} disabled
                                     onChange={(e) => setPhone(e.target.value)}
                                 />
                             </div>
@@ -114,7 +117,7 @@ export default function UserDetail() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                    value={email}
+                                    value={email} disabled
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
@@ -124,7 +127,7 @@ export default function UserDetail() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                    value={username}
+                                    value={username} disabled
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
