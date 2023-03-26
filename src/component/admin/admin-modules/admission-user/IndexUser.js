@@ -7,8 +7,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 export default function IndexUser() {
-    const nav = useNavigate()
-    const [users, setUsers] = useState([])
+    const nav = useNavigate();
+   
+    const [users, setUsers] = useState([]);
+    const [totalPages, setTotalPages] = useState([]);
+    const [pageNum, setPageNum] = useState(1);
     const [show, setShow] = useState(false);
     const [refreshKey, setRefreshKey] = useState(0); //to refresh user list after delete the user
 
@@ -22,20 +25,45 @@ export default function IndexUser() {
             setModalShow(true);
         }
     }
+    const loadUsers = async () => {
+        let url = pageNum === 1 ? endpoints["user"] : `${endpoints["user"]}?page=${pageNum}`;
+        await API.get(url).then(res => {
+            setUsers(res.data.results);
+            if(Number(res.data.results.length) === 1) {
+                setTotalPages([1]);
+            } else {
+                var n_loop = Math.ceil(Number(res.data.count) / Number(res.data.results.length));
+                const  totalPagesTemp = [];
+                for(var i = 1; i <= n_loop; i++) {
+                    totalPagesTemp.push(i);
+                }
+                setTotalPages(totalPagesTemp);
+            }
+        })
+    }
+
+    const onClickPage = (page) => {
+        
+        return () => {
+            setPageNum(page);
+            loadUsers();
+        }
+    }
 
     useEffect(() => {
-        const loadUsers = async () => {
-            await API.get(endpoints["user"]).then(res => {
-                setUsers(res.data.results);
-            })
-        }
-        loadUsers()
-    }, [refreshKey])
+        loadUsers();
+    }, [refreshKey,pageNum]);
+
+    useEffect(() => {
+    }, [totalPages]);
+
+    useEffect(() => {
+    }, [pageNum]);
+
 
     const deleteUser = () => {
         handleModalClose();
         API.delete(endpoints["user"] + `${deleteUserId}/`).then(res => {
-            console.log(res)
             if (res && res.status == 204) {
                 setShow(true)
                 // loadUsers2()
@@ -130,6 +158,26 @@ export default function IndexUser() {
                                 «
                             </a>
                         </li>
+                        {totalPages.map(page => 
+                            <li className="page-item">
+                                <Link className="page-link" to={ page == 1 ? `` : `/admin/user/?page=${page}`} onClick={onClickPage(page)}>
+                                            {page}
+                                </Link>
+                            </li>
+                            )
+                        }
+
+                        <li className="page-item">
+                            <a className="page-link" href="#">
+                                »
+                            </a>
+                        </li>
+
+                        {/* <li className="page-item">
+                            <a className="page-link" href="#">
+                                «
+                            </a>
+                        </li>
                         <li className="page-item">
                             <a className="page-link" href="#">
                                 1
@@ -149,7 +197,7 @@ export default function IndexUser() {
                             <a className="page-link" href="#">
                                 »
                             </a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>
