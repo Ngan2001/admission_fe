@@ -5,6 +5,8 @@ import { Outlet, Link } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { constantConfig } from "../../../../constantConfig";
+
 
 export default function IndexUser() {
     const nav = useNavigate();
@@ -29,16 +31,24 @@ export default function IndexUser() {
         let url = pageNum === 1 ? endpoints["user"] : `${endpoints["user"]}?page=${pageNum}`;
         await API.get(url).then(res => {
             setUsers(res.data.results);
-            if(Number(res.data.results.length) === 1) {
-                setTotalPages([1]);
-            } else {
-                var n_loop = Math.ceil(Number(res.data.count) / Number(res.data.results.length));
+
+            var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
                 const  totalPagesTemp = [];
                 for(var i = 1; i <= n_loop; i++) {
                     totalPagesTemp.push(i);
                 }
                 setTotalPages(totalPagesTemp);
-            }
+
+            // if(Number(res.data.results.length) === 1) {
+            //     setTotalPages([1]);
+            // } else {
+            //     var n_loop = Math.ceil(Number(res.data.count) / Number(myConstClass.PAGESIZE));
+            //     const  totalPagesTemp = [];
+            //     for(var i = 1; i <= n_loop; i++) {
+            //         totalPagesTemp.push(i);
+            //     }
+            //     setTotalPages(totalPagesTemp);
+            // }
         })
     }
 
@@ -160,7 +170,7 @@ export default function IndexUser() {
                         </li>
                         {totalPages.map(page => 
                             <li className="page-item">
-                                <Link className="page-link" to={ page == 1 ? `` : `/admin/user/?page=${page}`} onClick={onClickPage(page)}>
+                                <Link className={"page-link " + (pageNum == page ? 'link-active' : '')} to={ page == 1 ? `` : `/admin/user/?page=${page}`} onClick={onClickPage(page)}>
                                             {page}
                                 </Link>
                             </li>
