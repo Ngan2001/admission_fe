@@ -30,7 +30,7 @@ export default function CreateUser() {
         var img = document.getElementById('blah');
         canvas.width = img.width;
         canvas.height = img.height;
-        context.drawImage(img, 0, 0, img.width, img.height);
+        context.drawImage(img, 0, 0,img.width, img.height);
         var dataURL = canvas.toDataURL("image/png");
         dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 
@@ -57,7 +57,7 @@ export default function CreateUser() {
                 handleModalClose();
                 nav("/admin/user")
             }, 2000);
-
+            
         }).catch(e => {
             setCreateMessage('Tạo mới thất bại!')
             handleModalShow();
@@ -74,13 +74,13 @@ export default function CreateUser() {
         <>
             <Modal show={modalShow} onHide={handleModalClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Thông báo</Modal.Title>
+                <Modal.Title>Thông báo</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{createMessage}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleModalClose}>
-                        Đóng
-                    </Button>
+                <Button variant="secondary" onClick={handleModalClose}>
+                    Đóng
+                </Button>
                 </Modal.Footer>
             </Modal>
             <div className="content-wrapper">
@@ -189,127 +189,7 @@ export default function CreateUser() {
                     </form>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Họ</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Tên</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div class="form-group">
-                    <label>Ngày sinh</label>
-                    <div class="input-group">
-                        <input id="startDate" class="form-control" type="date" />
-                        {/* <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                </div>
-                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric"/> */}
-                    </div>
-
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Địa chỉ</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Số điện thoại</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Email</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Tài khoản đăng nhập</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Mật khẩu</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Xác nhận mật khẩu</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputFile">Chọn ảnh</label>
-                    <div className="input-group">
-                        <div className="custom-file">
-                            <input
-                                type="file"
-                                className="custom-file-input"
-                                id="exampleInputFile"
-                            />
-                            <label className="custom-file-label" htmlFor="exampleInputFile">
-                                Choose file
-                            </label>
-                        </div>
-                        <div className="input-group-append">
-                            <span className="input-group-text">Upload</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Quyền</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-
-                    />
-                </div>
             </div>
-            <div className="card-footer text-center">
-                <a type="button" className="btn btn-primary mr-2" href="/admin/user">
-                    Trở về
-                </a>
-                <button type="submit" className="btn btn-primary">
-                    Tạo mới
-                </button>
-            </div>
-        </form>
-            </div >
 
             <button id="modal-btn" type="button" className="btn btn-primary  opacity-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal

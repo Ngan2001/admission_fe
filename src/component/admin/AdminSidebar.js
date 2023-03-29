@@ -36,7 +36,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="/admin/school" className="nav-link">
+                            <a href="pages/kanban.html" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Thông tin trường
@@ -44,7 +44,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="/admin/type" className="nav-link">
+                            <a href="pages/kanban.html" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Loại tuyển sinh
@@ -52,7 +52,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="/admin/admission" className="nav-link">
+                            <a href="pages/kanban.html" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Tin tuyển sinh
@@ -60,7 +60,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="/admin/banner" className="nav-link">
+                            <a href="pages/kanban.html" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Banner
@@ -68,7 +68,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="/admin/department" className="nav-link">
+                            <a href="pages/kanban.html" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Khoa
@@ -76,7 +76,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="/admin/livenotification" className="nav-link">
+                            <a href="pages/kanban.html" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Thông báo livestreams
@@ -84,7 +84,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="/admin/questions" className="nav-link">
+                            <a href="pages/kanban.html" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Bảng câu hỏi thường gặp

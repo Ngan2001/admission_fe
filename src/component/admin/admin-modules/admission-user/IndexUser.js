@@ -129,44 +129,38 @@ export default function IndexUser() {
                             <tr>
                                 <th style={{ width: 10 }}>#</th>
                                 <th>Tên người dùng</th>
-                                <th>Ngày sinh</th>
-                                <th>Địa chi</th>
                                 <th>Số điện thoại</th>
                                 <th>Email</th>
-                                <th>Tên tài khoản</th>
-                                <th>Mật khẩu</th>
-                                <th>Ảnh</th>
                                 <th>Quyền</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>Update software</td>
-                                <td>
-                                    567890
-                                </td>
-                                <td>
-                                    gygygyg@mail.com
-                                </td>
-                                <td>
-                                    Hiệu trưởng
-                                </td>
-                                <td>
-                                    <button type="button" className="btn btn-default">
-                                        <i className="fas fa-pencil-alt"></i>
-                                    </button>
-                                    <button type="button" className="btn btn-default">
-                                        <i className="far fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
+                            {users.map((u, index) =>
+                                <tr key={u.id}>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        <Link className="btn-item auction-btn mr-2" to={`detail/${u.id}`}>
+                                            {u.last_name + ' ' + u.first_name}
+                                        </Link>
+                                    </td>
+                                    <td>{u.phone}</td>
+                                    <td>{u.email}</td>
+                                    <td>{u.is_superuser == true ? 'Ban tư vấn' : 'Sinh viên'}</td>
+                                    <td>
+                                        <button type="button" className="btn btn-default mr-2" onClick={goEdit(u.id)}>
+                                            <i className="fas fa-pencil-alt"></i>
+                                        </button>
+                                        <button type="button" className="btn btn-danger" onClick={handleModalShow(u.id)}>
+                                            <i className="far fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                            }
                         </tbody>
                     </table>
                 </div>
-                {/* Phân trang */}
                 <div className="card-footer clearfix">
                     <ul className="pagination pagination-sm m-0 float-right">
                         <li className="page-item">

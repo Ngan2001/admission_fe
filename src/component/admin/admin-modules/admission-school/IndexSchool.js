@@ -5,12 +5,14 @@ export default function IndexSchool() {
 
     return (
         <div className="content-wrapper">
-            <h1>Thông tin về trường học</h1>
+            <h1>Admin School</h1>
             <div className="card">
                 <div className="card-header">
-                    <a href="/admin/school/create" type="button" className="btn btn-primary btn-block" style={{ width: '200px', float: 'right' }}>
+                    <h3 className="card-title">Bordered Table</h3>
+
+                    <button type="button" className="btn btn-primary btn-block" style={{ width: '200px', float: 'right' }}>
                         <i className="fas fa-utensil-spoon"></i> Thêm mới
-                    </a>
+                    </button>
 
                 </div>
                 <div className="card-body">
@@ -18,8 +20,10 @@ export default function IndexSchool() {
                         <thead>
                             <tr>
                                 <th style={{ width: 10 }}>#</th>
-                                <th>Hình ảnh</th>
-                                <th>Thông tin</th>
+                                <th>Tên người dùng</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Quyền</th>
                                 <th style={{ width: 40 }}>Thao tác</th>
                             </tr>
                         </thead>
@@ -27,6 +31,12 @@ export default function IndexSchool() {
                             <tr>
                                 <td>1.</td>
                                 <td>Update software</td>
+                                <td>
+                                    567890
+                                </td>
+                                <td>
+                                    gygygyg@mail.com
+                                </td>
                                 <td>
                                     Hiệu trưởng
                                 </td>

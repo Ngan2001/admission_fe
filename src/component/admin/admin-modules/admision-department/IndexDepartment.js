@@ -10,9 +10,9 @@ export default function IndexDepartment() {
                 <div className="card-header">
                     <h3 className="card-title">Bordered Table</h3>
 
-                    <a href="/admin/department/create" type="button" className="btn btn-primary btn-block" style={{ width: '200px', float: 'right' }}>
+                    <button type="button" className="btn btn-primary btn-block" style={{ width: '200px', float: 'right' }}>
                         <i className="fas fa-utensil-spoon"></i> Thêm mới
-                    </a>
+                    </button>
 
                 </div>
                 <div className="card-body">
