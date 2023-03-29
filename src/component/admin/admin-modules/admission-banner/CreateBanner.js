@@ -27,23 +27,22 @@ export default function CreateBanner() {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Mô tả</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="exampleInputPassword1"
-                        placeholder="Password"
-                    />
-                </div>
+                            <label htmlFor="exampleInputPassword1">Mô tả</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="exampleInputPassword1"
+                            />
+                        </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Link-url</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="exampleInputPassword1"
-                        placeholder="Password"
-                    />
-                </div>
+                            <label htmlFor="exampleInputPassword1">link_url</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="exampleInputPassword1"
+
+                            />
+                        </div>
             </div>
         </div>
     )

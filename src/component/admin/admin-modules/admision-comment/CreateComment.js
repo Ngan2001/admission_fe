@@ -10,7 +10,7 @@ export default function CreateComment() {
                 </div>
                 <form>
                     <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Câu hỏi</label>
+                        <label htmlFor="exampleInputPassword1">mội dung</label>
                         <div
                             className="input-group date"
                             id="reservationdate"

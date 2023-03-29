@@ -56,7 +56,7 @@ export default function CreateQuetions () {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Câu trả lời</label>
+                            <label htmlFor="exampleInputPassword1">Đáp án</label>
                             <div
                                 className="input-group date"
                                 id="reservationdate"

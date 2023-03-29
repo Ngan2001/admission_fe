@@ -1,16 +1,15 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom"
 
-export default function IndexComment() {
+
+export default function IndexLiveNotification() {
 
     return (
         <div className="content-wrapper">
-            <h1>Nơi đặt câu hỏi</h1>
+            <h1>Thông báo livestream </h1>
             <div className="card">
                 <div className="card-header">
-                    <h3 className="card-title">Bordered Table</h3>
-
-                    <a href="/admin/comment/create" type="button" className="btn btn-primary btn-block" style={{ width: '200px', float: 'right' }}>
+                    <a href="/admin/livestream/create" type="button" className="btn btn-primary btn-block" style={{ width: '200px', float: 'right' }}>
                         <i className="fas fa-utensil-spoon"></i> Thêm mới
                     </a>
 
@@ -19,11 +18,9 @@ export default function IndexComment() {
                     <table className="table table-bordered">
                         <thead>
                             <tr>
-                                <th style={{ width: 10 }}>#</th>
-                                <th>Tên người dùng</th>
-                                <th>Số điện thoại</th>
-                                <th>Email</th>
-                                <th>Quyền</th>
+                                <th style={{ width: 10 }}>ID</th>
+                                <th>Tiêu đề</th>
+                                <th>Nội dung</th>
                                 <th style={{ width: 40 }}>Thao tác</th>
                             </tr>
                         </thead>
@@ -31,12 +28,6 @@ export default function IndexComment() {
                             <tr>
                                 <td>1.</td>
                                 <td>Update software</td>
-                                <td>
-                                    567890
-                                </td>
-                                <td>
-                                    gygygyg@mail.com
-                                </td>
                                 <td>
                                     Hiệu trưởng
                                 </td>
