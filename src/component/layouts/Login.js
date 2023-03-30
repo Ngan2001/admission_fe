@@ -2,21 +2,36 @@ import React, { Component } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import API, { endpoints } from "../../API";
+import jwt_decode from "jwt-decode";
 
 export default function Login() {
-  const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
+  const [user, setUser] = useState("");
 
-  const location = useLocation()
-  const nav = useNavigate()
-  // const login = async () => {
-  //   if (location.pathname.includes('admin-login')) {
-  //     nav("/admin");
-  //   } else {
-  //     nav("/");
-  //   }
+  const location = useLocation();
+  const nav = useNavigate();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [userLogin, setUserLogin] = useState({firstName, lastName, email, username, avatar});
 
-  // }
+  const loadUsers = async (user_id) => {
+    await API.get(endpoints[`user`] + `${user_id}`).then(res => {
+        const {last_name, first_name, email, username, avatar} = res.data;
+        let userRes = {
+          firstName: first_name,
+          lastName: last_name,
+          email: email,
+          username: username,
+          avatar: avatar,
+        }
+        setUserLogin(userRes);
+        localStorage.setItem("user", JSON.stringify(userRes));
+    })
+}
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,12 +40,25 @@ export default function Login() {
       "password": pwd
     }
     const response = await API.post(endpoints["authenticate"], data);
-    console.log(response);
     if(response && response.status == 200) {
-      nav("/admin")
+        let token = response.data.access;
+        localStorage.setItem("token", token);
+        var decoded = jwt_decode(token);
+        localStorage.setItem("user_id", decoded.user_id);
+        localStorage.setItem("isLogged", true);
+        
+      loadUsers(decoded.user_id).then(
+        res => {
+          if (location.pathname.includes('admin-login')) {
+            nav("/admin");
+          } else {
+            nav("/");
+          }
+        }
+      )
+       
     }
   }
-  // }, [])
   return (
     <div className="register-page" style={{ minHeight: "569.6px" }}>
       <div className="login-box">

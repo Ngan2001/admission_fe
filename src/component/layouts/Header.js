@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Register from "./Register";
 import Login from "./Login";
 import { Outlet, Link } from "react-router-dom";
@@ -16,6 +16,29 @@ export default function Header() {
             fontSize: '20px',
             fontWeight: '400',
         }
+
+        const [isLogged, setIsLogged] = useState(false);
+        const [userAvatarURL, setUserAvatarURL] = useState("");
+        const [username, setUsername] = useState("");
+
+        useEffect(() => {
+            let checkUserLogin = localStorage.getItem("isLogged");
+            if(checkUserLogin) {
+                setIsLogged(checkUserLogin);
+                let user = JSON.parse(localStorage.getItem("user"));
+    
+                if(user != null && user != undefined) {
+                    setUserAvatarURL(user.avatar);
+                    setUsername(user.username);
+                }
+            }
+        }, []);
+
+        const logOut = () => {
+            localStorage.clear();
+            setIsLogged(false);
+        }
+
         return (
             <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{ padding: 0 }}>
                 <div className="container-fluid" style={{ background: '#1150a0' }}>
@@ -36,38 +59,36 @@ export default function Header() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <span style={brandTxt} >Cổng thông tin tuyển sinh<br />
                             Trường Đại học Mở Thành phố Hồ Chí Minh</span>
-                        <form className="ms-auto" role="search">
-                            {/* <input
-                                className="form-control me-2 w-25"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                            />
-                            <button className="btn btn-outline-success" type="submit" style={buttonCSS}>
-                                Search
-                            </button> */}
+                        { !isLogged && 
+                            <form className="ms-auto" role="search">
+                                <Link className="btn btn-outline-primary" style={buttonCSS} to="/login">Đăng nhập</Link>
+                                <Link className="btn btn-outline-primary" style={buttonCSS} to="/register">Đăng ký</Link>
+                            </form>
+                        }
 
-                            <Link className="btn btn-outline-primary" style={buttonCSS} to="/login">Đăng nhập</Link>
-                            <Link className="btn btn-outline-primary" style={buttonCSS} to="/register">Đăng ký</Link>
-                        </form>
-                        <img src="admin-lte/dist/img/user3-128x128.jpg" className="rounded-circle" alt="..." style={{ height: '40px', width: '40px' }}></img>
-                        {/* <a href="#" className="link-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Nguyễn Thị Kim Ngân</a> */}
-                        <div className="dropdown">
-                            <button
-                                className="btn dropdown-toggle border-0 text-white"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false" >
-                                Nguyễn Thị Kim Ngân
-                            </button>
-                            <ul className="dropdown-menu">
-                                <li>
-                                    <a className="dropdown-item" href="#">
-                                        Đăng xuất
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        { isLogged && 
+                            <div className="d-flex ms-auto">
+                                <img src={userAvatarURL} className="rounded-circle" alt="..." style={{ height: '40px', width: '40px' }}></img>
+                                <div className="dropdown">
+                                    <button
+                                        className="btn dropdown-toggle border-0 text-white"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false" >
+                                            {username}
+                                    </button>
+                                    <ul className="dropdown-menu">
+                                        <li>
+                                            <a className="dropdown-item" href="#" onClick={logOut}>
+                                                Đăng xuất
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                        
+                        
                     </div>
                 </div>
             </nav>

@@ -23,43 +23,46 @@ import UserDetail from './component/admin/admin-modules/admission-user/UserDetai
 import UpdateUser from './component/admin/admin-modules/admission-user/UpdateUser';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
-      <Routes>
-        {/*         <Route index element={<App />} /> */}
-        <Route path="" element={<App />}>
+  <BrowserRouter>
+    <Routes>
+      {/*         <Route index element={<App />} /> */}
+      <Route path="" element={<App />}>
         <Route path="" element={<Content />} />
-          <Route path="department">
-            <Route path="" element={<DepartmentIndex />} />
-            <Route path="detail" element={<DepartmentDetail />} />
-          </Route>
-          <Route path="admission">
-            <Route path="" element={<AdmissionIndex />} />
-            <Route path="detail" element={<AdmissionDetail />} />
-          </Route>
-          <Route path="livestream">
-            <Route path="" element={<LivestreamIndex />} />
-            <Route path="detail" element={<LivestreamDetail />} />
-          </Route>
-          <Route path="faq">
-            <Route path="" element={<FAQIndex />} />
-            <Route path="question" element={<QuestionForm />} />
-          </Route>
+        <Route path="department">
+          <Route path="" element={<DepartmentIndex />} />
+          <Route path="detail" element={<DepartmentDetail />} />
         </Route>
-
-        <Route path="admin" element={<AdminContainer />}>
-          <Route path="user">
-            <Route path="" element={<IndexUser />}/>
-            <Route exact path="create" element={<CreateUser />}/>
-            <Route exact path="detail/:userId" element={<UserDetail />}/>
-            <Route exact path="edit/:userId" element={<UpdateUser />}/>
-          </Route>
+        <Route path="admission">
+          <Route path="" element={<AdmissionIndex />} />
+          <Route path="detail" element={<AdmissionDetail />} />
         </Route>
+        <Route path="livestream">
+          <Route path="" element={<LivestreamIndex />} />
+          <Route path="detail" element={<LivestreamDetail />} />
+        </Route>
+        <Route path="faq">
+          <Route path="" element={<FAQIndex />} />
+          <Route path="question" element={<QuestionForm />} />
+        </Route>
+      </Route>
+
+      <Route path="register" element={<Register />} />
+      <Route path="login" element={<Login />} />
+
+      <Route path="admin" element={<AdminContainer />}>
+        <Route path="user">
+          <Route path="" element={<IndexUser />} />
+          <Route exact path="create" element={<CreateUser />} />
+          <Route exact path="detail/:userId" element={<UserDetail />} />
+          <Route exact path="edit/:userId" element={<UpdateUser />} />
+        </Route>
+      </Route>
 
 
-        <Route path="admin-login" element={<Login />} />
+      <Route path="admin-login" element={<Login />} />
 
-      </Routes>
-    </BrowserRouter>
+    </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
