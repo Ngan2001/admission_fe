@@ -25,6 +25,7 @@ export default function CreateUser() {
     const handleModalShow = () => setModalShow(true);
 
     const createUser = async () => {
+        // chuyển hình ảnh sang dạng base64
         var canvas = document.createElement('canvas');
         var context = canvas.getContext('2d');
         var img = document.getElementById('blah');
@@ -33,7 +34,8 @@ export default function CreateUser() {
         context.drawImage(img, 0, 0,img.width, img.height);
         var dataURL = canvas.toDataURL("image/png");
         dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-
+        // end chuyển hình ảnh sang dạng base64
+        console.log(dataURL);
         var myData = dataURL;
 
         const data = {
@@ -50,6 +52,7 @@ export default function CreateUser() {
             'is_superuser': true
         };
 
+        // dòng này là gọi API
         const response = await API.post(endpoints["user"], data).then(res => {
             setCreateMessage('Tạo mới thành công!')
             handleModalShow();
@@ -65,6 +68,7 @@ export default function CreateUser() {
                 handleModalClose();
             }, 2000);
         });
+        // end dòng này là gọi API
     }
     const handleChangeImage = e => {
         setAvatar(URL.createObjectURL(e.target.files[0]))
@@ -190,6 +194,7 @@ export default function CreateUser() {
                 </div>
 
             </div>
+     
 
             <button id="modal-btn" type="button" className="btn btn-primary  opacity-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
