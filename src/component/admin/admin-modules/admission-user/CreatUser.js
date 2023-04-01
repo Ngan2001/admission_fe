@@ -6,25 +6,96 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 export default function CreateUser() {
-    const nav = useNavigate()
+    let avatarDefault = "/assets/images/no-avatar.jpg";
+    const nav = useNavigate();
 
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [birthday, setBirthday] = useState("")
-    const [phone, setPhone] = useState("")
-    const [email, setEmail] = useState("")
-    const [address, setAddress] = useState("")
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [passwordConfirm, setPasswordConfirm] = useState("")
-    const [avatar, setAvatar] = useState("")
-    const [createMessage, setCreateMessage] = useState("")
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [birthday, setBirthday] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [avatar, setAvatar] = useState("");
+    const [createMessage, setCreateMessage] = useState("");
+    const [errors, setErrors] = useState({});
 
     const [modalShow, setModalShow] = useState(false);
     const handleModalClose = () => setModalShow(false);
     const handleModalShow = () => setModalShow(true);
 
+
+    const handleSubmit = () => {
+        var imgSrc = document.getElementById("blah").src;
+        let errorsChk = {};
+        let formIsValid = true;
+    
+        
+        if(imgSrc.includes("no-avatar")) {
+          errorsChk["avatar"] = "Không được để trống";
+          formIsValid =false;
+        }
+        if(firstName == null || firstName == "") {
+          errorsChk["firstName"] = "Không được để trống";
+          formIsValid =false;
+        }
+        if(lastName == null || lastName == "") {
+          errorsChk["lastName"] = "Không được để trống";
+          formIsValid =false;
+        }
+        if(birthday == null || birthday == "") {
+          errorsChk["birthday"] = "Không được để trống";
+          formIsValid =false;
+        }
+        if(phone == null || phone == "") {
+          errorsChk["phone"] = "Không được để trống";
+          formIsValid =false;
+        }
+    
+        if(address == null || address == "") {
+          errorsChk["address"] = "Không được để trống";
+          formIsValid =false;
+        }
+    
+        
+    
+        if(email == null || email == "") {
+          errorsChk["email"] = "Không được để trống";
+          formIsValid =false;
+        }
+    
+        if (email != null && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+          errorsChk["email"]= " Email không hợp lệ ";
+          formIsValid =false;
+        }
+    
+        if(password == null || password == "") {
+          errorsChk["password"] = "Không được để trống";
+          formIsValid =false;
+        }
+    
+        if(passwordConfirm == null || passwordConfirm == "") {
+          errorsChk["passwordConfirm"] = "Không được để trống";
+          formIsValid =false;
+        }
+    
+        if(passwordConfirm != null && password != null && password != passwordConfirm) {
+          errorsChk["passwordConfirm"] = "Xác nhận mật khẩu không khớp";
+          formIsValid =false;
+        }
+    
+        setErrors(errorsChk);
+        return formIsValid;
+    }
+
     const createUser = async () => {
+        setErrors({});
+        if(!handleSubmit()) {
+            return;
+        }
+
         var canvas = document.createElement('canvas');
         var context = canvas.getContext('2d');
         var img = document.getElementById('blah');
@@ -59,6 +130,16 @@ export default function CreateUser() {
             }, 2000);
             
         }).catch(e => {
+            let errorsCheck = {};
+            if(e.response.data['username']) {
+                errorsCheck["username"] = "Tài khoản đã tồn tại";
+            }
+
+            if(e.response.data['phone']) {
+                errorsCheck["phone"] = "Số điện thoại phải ít hơn 11 số";
+            }
+            setErrors(errorsCheck);
+
             setCreateMessage('Tạo mới thất bại!')
             handleModalShow();
             setTimeout(() => {
@@ -93,9 +174,10 @@ export default function CreateUser() {
                             <div className="form-group">
                                 <label htmlFor="exampleInputFile">Chọn ảnh</label>
                                 <div className="input-group">
-                                    <img id="blah" alt="your image" src={avatar} style={{ height: '100px', width: '100px', border: '1px solid black', marginRight: '15px' }} />
+                                    <img id="blah" alt="your image" src={avatar === "" ? avatarDefault : avatar} style={{ height: '100px', width: '100px', border: '1px solid black', marginRight: '15px' }} />
                                     <input type="file" onChange={handleChangeImage} />
                                 </div>
+                                <span style={{ color: "red" }}>{errors['avatar']}</span>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Họ</label>
@@ -105,6 +187,7 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setLastName(e.target.value)}
                                 />
+                                <span style={{ color: "red" }}>{errors['lastName']}</span>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Tên</label>
@@ -114,12 +197,14 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setFirstName(e.target.value)}
                                 />
+                                 <span style={{ color: "red" }}>{errors['firstName']}</span>
                             </div>
                             <div className="form-group">
                                 <label>Ngày sinh</label>
                                 <div className="input-group">
                                     <input id="startDate" className="form-control" type="date"
                                         onChange={(e) => setBirthday(e.target.value)} />
+                                        <span style={{ color: "red" }}>{errors['birthday']}</span>
                                 </div>
 
                             </div>
@@ -131,6 +216,7 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setAddress(e.target.value)}
                                 />
+                                <span style={{ color: "red" }}>{errors['address']}</span>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Số điện thoại</label>
@@ -140,6 +226,7 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setPhone(e.target.value)}
                                 />
+                                <span style={{ color: "red" }}>{errors['phone']}</span>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Email</label>
@@ -149,6 +236,7 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
+                                <span style={{ color: "red" }}>{errors['email']}</span>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Tài khoản đăng nhập</label>
@@ -158,6 +246,7 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
+                                <span style={{ color: "red" }}>{errors['username']}</span>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Mật khẩu</label>
@@ -167,6 +256,7 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
+                                <span style={{ color: "red" }}>{errors['password']}</span>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Xác nhận mật khẩu</label>
@@ -176,6 +266,7 @@ export default function CreateUser() {
                                     id="exampleInputPassword1"
                                     onChange={(e) => setPasswordConfirm(e.target.value)}
                                 />
+                                <span style={{ color: "red" }}>{errors['passwordConfirm']}</span>
                             </div>
                         </div>
                         <div className="card-footer text-center">
@@ -187,26 +278,6 @@ export default function CreateUser() {
                             </button>
                         </div>
                     </form>
-                </div>
-
-            </div>
-
-            <button id="modal-btn" type="button" className="btn btn-primary  opacity-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
-            </button>
-            <div
-                className="modal fade"
-                id="exampleModal"
-                tabIndex={-1}
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            {createMessage}
-                        </div>
-                    </div>
                 </div>
             </div>
         </>

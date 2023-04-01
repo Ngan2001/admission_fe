@@ -112,16 +112,10 @@ export default function Login() {
             </form>
             <div className="social-auth-links text-center mb-3">
               <p>- OR -</p>
-              <a href="#" className="btn btn-block btn-primary">
-                <i className="fab fa-facebook mr-2" /> Đăng nhập bằng FB
-              </a>
-              <a href="#" className="btn btn-block btn-danger">
-                <i className="fab fa-google-plus mr-2" /> Đăng nhập bằng Google+
+              <a href="/" className="btn btn-block btn-danger">
+                Trờ về
               </a>
             </div>
-            <p className="mb-1">
-              <a href="forgot-password.html">Quên mật khẩu</a>
-            </p>
             <p className="mb-0">
               <a href="/register" className="text-center">
                 Tạo tài khoản

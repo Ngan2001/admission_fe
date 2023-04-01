@@ -9,23 +9,91 @@ export default function Register() {
   let avatarDefault = "assets/images/no-avatar.jpg";
   const nav = useNavigate()
 
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [birthday, setBirthday] = useState("")
-  const [phone, setPhone] = useState("")
-  const [email, setEmail] = useState("")
-  const [address, setAddress] = useState("")
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [passwordConfirm, setPasswordConfirm] = useState("")
-  const [avatar, setAvatar] = useState("")
-  const [createMessage, setCreateMessage] = useState("")
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [createMessage, setCreateMessage] = useState("");
+  const [errors, setErrors] = useState({});
 
   const [modalShow, setModalShow] = useState(false);
   const handleModalClose = () => setModalShow(false);
   const handleModalShow = () => setModalShow(true);
 
+  const handleSubmit = () => {
+    var imgSrc = document.getElementById("blah").src;
+    let errorsChk = {};
+    let formIsValid = true;
+
+    
+    if(imgSrc.includes("no-avatar")) {
+      errorsChk["avatar"] = "Không được để trống";
+      formIsValid =false;
+    }
+    if(firstName == null || firstName == "") {
+      errorsChk["firstName"] = "Không được để trống";
+      formIsValid =false;
+    }
+    if(lastName == null || lastName == "") {
+      errorsChk["lastName"] = "Không được để trống";
+      formIsValid =false;
+    }
+    if(birthday == null || birthday == "") {
+      errorsChk["birthday"] = "Không được để trống";
+      formIsValid =false;
+    }
+    if(phone == null || phone == "") {
+      errorsChk["phone"] = "Không được để trống";
+      formIsValid =false;
+    }
+
+    if(address == null || address == "") {
+      errorsChk["address"] = "Không được để trống";
+      formIsValid =false;
+    }
+
+    
+
+    if(email == null || email == "") {
+      errorsChk["email"] = "Không được để trống";
+      formIsValid =false;
+    }
+
+    if (email != null && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+      errorsChk["email"]= " Email không hợp lệ ";
+      formIsValid =false;
+    }
+
+    if(password == null || password == "") {
+      errorsChk["password"] = "Không được để trống";
+      formIsValid =false;
+    }
+
+    if(passwordConfirm == null || passwordConfirm == "") {
+      errorsChk["passwordConfirm"] = "Không được để trống";
+      formIsValid =false;
+    }
+
+    if(passwordConfirm != null && password != null && password != passwordConfirm) {
+      errorsChk["passwordConfirm"] = "Xác nhận mật khẩu không khớp";
+      formIsValid =false;
+    }
+
+    setErrors(errorsChk);
+    return formIsValid;
+  }
+
   const createUser = async () => {
+    setErrors({});
+    if(!handleSubmit()) {
+      return;
+    }
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
     var img = document.getElementById('blah');
@@ -60,7 +128,17 @@ export default function Register() {
       }, 2000);
 
     }).catch(e => {
-      setCreateMessage('Tạo mới thất bại!')
+      let errorsCheck = {};
+      if(e.response.data['username']) {
+        errorsCheck["username"] = "Tài khoản đã tồn tại";
+      }
+
+      if(e.response.data['phone']) {
+        errorsCheck["phone"] = "Số điện thoại phải ít hơn 11 số";
+      }
+      setErrors(errorsCheck);
+
+      setCreateMessage('Tạo mới thất bại!');
       handleModalShow();
       setTimeout(() => {
         handleModalClose();
@@ -88,6 +166,7 @@ export default function Register() {
                   <div className="input-group">
                     <img id="blah" src={avatar === "" ? avatarDefault : avatar} style={{ height: '100px', width: '100px', border: '1px solid black', marginRight: '15px' }} />
                     <input type="file" onChange={handleChangeImage} />
+                    <span style={{ color: "red" }}>{errors['avatar']}</span>
                   </div>
                 </div>
                 <div className="row">
@@ -100,6 +179,7 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setLastName(e.target.value)}
                       />
+                      <span style={{ color: "red" }}>{errors['lastName']}</span>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -111,6 +191,7 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setFirstName(e.target.value)}
                       />
+                      <span style={{ color: "red" }}>{errors['firstName']}</span>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -120,7 +201,7 @@ export default function Register() {
                         <input id="startDate" className="form-control" type="date"
                           onChange={(e) => setBirthday(e.target.value)} />
                       </div>
-
+                      <span style={{ color: "red" }}>{errors['birthday']}</span>
                     </div>
                   </div>
                 </div>
@@ -136,6 +217,7 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setPhone(e.target.value)}
                       />
+                       <span style={{ color: "red" }}>{errors['phone']}</span>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -147,6 +229,7 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setAddress(e.target.value)}
                       />
+                      <span style={{ color: "red" }}>{errors['address']}</span>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -158,6 +241,7 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setEmail(e.target.value)}
                       />
+                      <span style={{ color: "red" }}>{errors['email']}</span>
                     </div>
                   </div>
                 </div>
@@ -172,6 +256,7 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setUsername(e.target.value)}
                       />
+                      <span style={{ color: "red" }}>{errors['username']}</span>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -183,6 +268,7 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                      <span style={{ color: "red" }}>{errors['password']}</span>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -194,12 +280,13 @@ export default function Register() {
                         id="exampleInputPassword1"
                         onChange={(e) => setPasswordConfirm(e.target.value)}
                       />
+                      <span style={{ color: "red" }}>{errors['passwordConfirm']}</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="card-footer text-center">
-                <a type="button" className="btn btn-primary mr-2" href="/admin/user" >
+                <a type="button" className="btn btn-primary mr-2" href="/" >
                   Trở về
                 </a>
                 <button type="button" className="btn btn-primary" onClick={createUser}>
