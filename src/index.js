@@ -58,9 +58,7 @@ root.render(
         </Route>
       </Route>
 
-
       <Route path="admin-login" element={<Login />} />
-
     </Routes>
   </BrowserRouter>
 );
