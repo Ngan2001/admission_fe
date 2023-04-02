@@ -1,3 +1,3 @@
 export const constantConfig = {
-    PAGESIZE: 2
+    PAGESIZE: 10
 }
