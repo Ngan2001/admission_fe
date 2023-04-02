@@ -38,17 +38,6 @@ export default function IndexUser() {
                     totalPagesTemp.push(i);
                 }
                 setTotalPages(totalPagesTemp);
-
-            // if(Number(res.data.results.length) === 1) {
-            //     setTotalPages([1]);
-            // } else {
-            //     var n_loop = Math.ceil(Number(res.data.count) / Number(myConstClass.PAGESIZE));
-            //     const  totalPagesTemp = [];
-            //     for(var i = 1; i <= n_loop; i++) {
-            //         totalPagesTemp.push(i);
-            //     }
-            //     setTotalPages(totalPagesTemp);
-            // }
         })
     }
 
@@ -75,11 +64,10 @@ export default function IndexUser() {
         handleModalClose();
         API.delete(endpoints["user"] + `${deleteUserId}/`).then(res => {
             if (res && res.status == 204) {
-                setShow(true)
-                // loadUsers2()
+                setRefreshKey(oldKey => oldKey + 1);
+                setShow(true);
                 setTimeout(() => {
-                    setShow(false)
-                    setRefreshKey(oldKey => oldKey + 1)
+                    setShow(false);
                 }, 2000);
             }
         })
@@ -182,32 +170,6 @@ export default function IndexUser() {
                                 »
                             </a>
                         </li>
-
-                        {/* <li className="page-item">
-                            <a className="page-link" href="#">
-                                «
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                1
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                2
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                3
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                »
-                            </a>
-                        </li> */}
                     </ul>
                 </div>
             </div>

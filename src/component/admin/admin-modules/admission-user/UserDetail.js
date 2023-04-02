@@ -5,19 +5,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 export default function UserDetail() {
-    let { userId } = useParams()
+    let { userId } = useParams();
 
-    const nav = useNavigate()
+    const nav = useNavigate();
 
-    const [obj, setObj] = useState({first_name: '', address: ''})
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [birthday, setBirthday] = useState("")
-    const [phone, setPhone] = useState("")
-    const [email, setEmail] = useState("")
-    const [address, setAddress] = useState("")
-    const [username, setUsername] = useState("")
-    const [avatar, setAvatar] = useState("")
+    const [obj, setObj] = useState({first_name: '', address: ''});
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [birthday, setBirthday] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [username, setUsername] = useState("");
+    const [avatar, setAvatar] = useState("");
 
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export default function UserDetail() {
             })
         }
         loadUsers()
-    }, [])
+    }, []);
 
 
     const handleChangeImage = e => {

@@ -44,7 +44,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="pages/kanban.html" className="nav-link">
+                            <a href="/admin/admission-type" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Loại tuyển sinh
@@ -52,7 +52,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="pages/kanban.html" className="nav-link">
+                            <a href="/admin/admission" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Tin tuyển sinh

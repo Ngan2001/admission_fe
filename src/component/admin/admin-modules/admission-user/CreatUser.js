@@ -106,7 +106,6 @@ export default function CreateUser() {
         var dataURL = canvas.toDataURL("image/png");
         dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
         // end chuyển hình ảnh sang dạng base64
-        console.log(dataURL);
         var myData = dataURL;
 
         const data = {
@@ -282,27 +281,6 @@ export default function CreateUser() {
                             </button>
                         </div>
                     </form>
-                </div>
-
-            </div>
-     
-
-            <button id="modal-btn" type="button" className="btn btn-primary  opacity-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
-            </button>
-            <div
-                className="modal fade"
-                id="exampleModal"
-                tabIndex={-1}
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            {createMessage}
-                        </div>
-                    </div>
                 </div>
             </div>
         </>

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API, { endpoints } from "../../../../API";
 import $ from 'jquery';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function CreateType() {
+export default function UpdateType() {
+    let { typeId } = useParams();
+
     const nav = useNavigate();
     const [admissionTypeName, setAdmissionTypeName] = useState("");
-    const [admissionTypeDescription, setAdmissionTypeDescription] = useState("");
+    const [admissionTypeDecription, setAdmissionTypeDecription] = useState("");
 
     const [errors, setErrors] = useState({});
 
@@ -26,8 +28,8 @@ export default function CreateType() {
             formIsValid = false;
         }
 
-        if (admissionTypeDescription == null || admissionTypeDescription == "") {
-            errorsChk["admissionTypeDescription"] = "Không được để trống";
+        if (admissionTypeDecription == null || admissionTypeDecription == "") {
+            errorsChk["admissionTypeDecription"] = "Không được để trống";
             formIsValid = false;
         }
 
@@ -35,7 +37,7 @@ export default function CreateType() {
         return formIsValid;
     }
 
-    const createType = async () => {
+    const updateType = async () => {
         setErrors({});
         if (!handleSubmit()) {
             return;
@@ -43,12 +45,12 @@ export default function CreateType() {
 
         const data = {
             'type_name': admissionTypeName,
-            'decription': admissionTypeDescription
+            'decription': admissionTypeDecription
         };
 
         // dòng này là gọi API
-        const response = await API.post(endpoints["admissionType"], data).then(res => {
-            setCreateMessage('Tạo mới thành công!')
+        const response = await API.put(endpoints["admissionType"] + `${typeId}/`, data).then(res => {
+            setCreateMessage('Cập nhật thành công!')
             handleModalShow();
             setTimeout(() => {
                 handleModalClose();
@@ -56,7 +58,7 @@ export default function CreateType() {
             }, 2000);
 
         }).catch(e => {
-            setCreateMessage('Tạo mới thất bại!')
+            setCreateMessage('Cập nhật thất bại!')
             handleModalShow();
             setTimeout(() => {
                 handleModalClose();
@@ -64,6 +66,18 @@ export default function CreateType() {
         });
         // end dòng này là gọi API
     }
+
+    useEffect(() => {
+        const loadTypes = async () => {
+            await API.get(endpoints[`admissionType`] + `${typeId}`).then(res => {
+                const {type_name, decription} = res.data;
+
+                setAdmissionTypeName(type_name);
+                setAdmissionTypeDecription(decription);
+            })
+        }
+        loadTypes();
+    }, []);
 
     return (
         <>
@@ -80,6 +94,7 @@ export default function CreateType() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
+                                    value={admissionTypeName}
                                     onChange={(e) => setAdmissionTypeName(e.target.value)}
                                 />
                                 <span style={{ color: "red" }}>{errors['admissionTypeName']}</span>
@@ -90,14 +105,18 @@ export default function CreateType() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                    onChange={(e) => setAdmissionTypeDescription(e.target.value)}
+                                    value={admissionTypeDecription}
+                                    onChange={(e) => setAdmissionTypeDecription(e.target.value)}
                                 />
                                 <span style={{ color: "red" }}>{errors['admissionTypeDescription']}</span>
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button type="button" className="btn btn-primary" onClick={createType}>
-                                Tạo mới
+                            <a type="button" className="btn btn-primary mr-2" href="/admin/admission-type">
+                                Trở về
+                            </a>
+                            <button type="button" className="btn btn-primary" onClick={updateType}>
+                                Cập nhật
                             </button>
                         </div>
                     </form>

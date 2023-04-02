@@ -21,6 +21,14 @@ import IndexUser from './component/admin/admin-modules/admission-user/IndexUser'
 import CreateUser from './component/admin/admin-modules/admission-user/CreatUser';
 import UserDetail from './component/admin/admin-modules/admission-user/UserDetail';
 import UpdateUser from './component/admin/admin-modules/admission-user/UpdateUser';
+import IndexType from './component/admin/admin-modules/admission-type/IndexType';
+import CreateType from './component/admin/admin-modules/admission-type/CreateType';
+import DetailType from './component/admin/admin-modules/admission-type/DetailType';
+import UpdateType from './component/admin/admin-modules/admission-type/UpdateType';
+import IndexAdmission from './component/admin/admin-modules/admissions-admission/IndexAdmission';
+import CreateAdmission from './component/admin/admin-modules/admissions-admission/CreateAdmission';
+import DetailAdmission from './component/admin/admin-modules/admissions-admission/DetailAdmission';
+import UpdateAdmission from './component/admin/admin-modules/admissions-admission/UpdateAdmission';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -55,6 +63,18 @@ root.render(
           <Route exact path="create" element={<CreateUser />} />
           <Route exact path="detail/:userId" element={<UserDetail />} />
           <Route exact path="edit/:userId" element={<UpdateUser />} />
+        </Route>
+        <Route path="admission-type">
+          <Route path="" element={<IndexType />} />
+          <Route exact path="create" element={<CreateType />} />
+          <Route exact path="detail/:typeId" element={<DetailType />} />
+          <Route exact path="edit/:typeId" element={<UpdateType />} />
+        </Route>
+        <Route path="admission">
+          <Route path="" element={<IndexAdmission />} />
+          <Route exact path="create" element={<CreateAdmission />} />
+          <Route exact path="detail/:admissionId" element={<DetailAdmission />} />
+          <Route exact path="edit/:admissionId" element={<UpdateAdmission />} />
         </Route>
       </Route>
 
