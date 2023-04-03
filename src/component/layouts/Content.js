@@ -1,88 +1,48 @@
 import React, { useState, useEffect } from "react";
-import DepartmentIndex from "../department/DepartmentIndex";
-import RightSidebar from "./RightSidebar";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Outlet, Link } from "react-router-dom";
-
-
-import { useNavigate, useParams } from 'react-router-dom';
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import { constantConfig } from "../../constantConfig";
 import API, { endpoints } from "../../API";
-import { type } from "@testing-library/user-event/dist/type";
 
 
 
 export default function Content() {
-        const chatBoxCss = {
-            bottom: '0',
-            right: '0',
-            marginBottom: '0'
-        }
-
-        const[a,setA] = useState("nhnhnhnhn");
-        const handleModalClose = () => setA("abc");
-
         const [types, setTypes] = useState([]);
-        const [admissions, setAdmissions] = useState([]);
-        const [totalPages, setTotalPages] = useState([]);
         const [pageNum, setPageNum] = useState(1);
-        const [show, setShow] = useState(false);
-        const [refreshKey, setRefreshKey] = useState(0); //to refresh user list after delete the user
-        
-        const loadAdmissions = async () => {
-            let url = pageNum === 1 ? endpoints["admission"] : `${endpoints["admission"]}?page=${pageNum}`;
-            await API.get(url).then(res => {
-                setAdmissions(res.data.results);
-    
-                var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
-                const totalPagesTemp = [];
-                for (var i = 1; i <= n_loop; i++) {
-                    totalPagesTemp.push(i);
-                }
-                setTotalPages(totalPagesTemp);
-            })
-        }
 
-        const loadTypes = async () => {
+        const loadTypes = new Promise((resolve, reject) => {
             let url = pageNum === 1 ? endpoints["admissionType"] : `${endpoints["admissionType"]}?page=${pageNum}`;
-            await API.get(url).then(res => {
-                setTypes(res.data.results);
-    
-                var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
-                const totalPagesTemp = [];
-                for (var i = 1; i <= n_loop; i++) {
-                    totalPagesTemp.push(i);
-                }
-                setTotalPages(totalPagesTemp);
-            })
-        }
+            API.get(url).then(res => {
+                resolve(res.data.results);
+            });
+          });
 
-        const groupAdmission = () => {
-            let tempTypes = types;
-            for(let i = 0; i < types.length; i++) {
-                let admissionsByType = admissions.filter(item => item.admission_type == types[i].id);
-                if(admissionsByType && admissionsByType.length > 0) {
-                    tempTypes[i]['admissions'] = admissionsByType;
-                } else {
-                    tempTypes[i]['admissions'] = [];
+        const loadAdmissions = new Promise((resolve, reject) => {
+            let url = pageNum === 1 ? endpoints["admission"] : `${endpoints["admission"]}?page=${pageNum}`;
+            API.get(url).then(res => {
+                resolve(res.data.results);
+            });
+        });
+
+        const fetchData = () => {
+            Promise.all([loadAdmissions, loadTypes]).then((values) => {
+                let admissionsRes = values[0];
+                let typesRes = values[1];
+                let tempTypes = [];
+                for(let i = 0; i < typesRes.length; i++) {
+                    tempTypes.push(typesRes[i]);
+                    let admissionsByType = admissionsRes.filter(item => item.admission_type == typesRes[i].id);
+                    if(admissionsByType && admissionsByType.length > 0) {
+                        tempTypes[i]['admissions'] = admissionsByType;
+                    } else {
+                        tempTypes[i]['admissions'] = [];
+                    }
                 }
-            }
-            setTypes(tempTypes);
+                setTypes(tempTypes);
+              });
         }
 
         useEffect(() => {
-            async function fetchMyAPI() {
-                await loadAdmissions();
-                await loadTypes();
-                groupAdmission();
-            }
-
-            fetchMyAPI();
-
-            
+            fetchData();
         }, []);
 
         return (
