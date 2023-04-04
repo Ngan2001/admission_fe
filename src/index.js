@@ -31,10 +31,6 @@ import DetailAdmission from './component/admin/admin-modules/admissions-admissio
 import UpdateAdmission from './component/admin/admin-modules/admissions-admission/UpdateAdmission';
 import IndexSchool from './component/admin/admin-modules/admission-school/IndexSchool';
 import CreateSchool from './component/admin/admin-modules/admission-school/CreateSchool';
-import IndexAdmission from './component/admin/admin-modules/admissions-admission/IndexAdmission';
-import CreateAdmission from './component/admin/admin-modules/admissions-admission/CreateAdmission';
-import IndexType from './component/admin/admin-modules/admission-type/IndexType';
-import CreateType from './component/admin/admin-modules/admission-type/CreateType';
 import IndexBanner from './component/admin/admin-modules/admission-banner/IndexBanner';
 import CreateBanner from './component/admin/admin-modules/admission-banner/CreateBanner';
 import IndexQuestions from './component/admin/admin-modules/admision-questions/IndexQuestions';

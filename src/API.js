@@ -4,6 +4,7 @@ export let endpoints = {
     'user': '/user/',
     'admissionType': '/admission-type/',
     'admission': '/admission/',
+    'banner': '/banner/',
 }
 export default axios.create({
     baseURL: "http://localhost:8000"

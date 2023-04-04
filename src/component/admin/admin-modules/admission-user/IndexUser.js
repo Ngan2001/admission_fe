@@ -14,9 +14,10 @@ export default function IndexUser() {
     const [users, setUsers] = useState([]);
     const [totalPages, setTotalPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
+    // thông báo xóa thành công 
     const [show, setShow] = useState(false);
     const [refreshKey, setRefreshKey] = useState(0); //to refresh user list after delete the user
-
+    // hện model có mún xóa hong
     const [modalShow, setModalShow] = useState(false);
     const [deleteUserId, setDeleteUserId] = useState(null);
 
@@ -78,6 +79,7 @@ export default function IndexUser() {
     const goEdit = (userId) => {
         return() => {
             nav(`edit/${userId}`);
+           // bằng với  "edit/" + userId
         }
     }
 
