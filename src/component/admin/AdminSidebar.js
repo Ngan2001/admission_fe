@@ -36,7 +36,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="pages/kanban.html" className="nav-link">
+                            <a href="/admin/school" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Thông tin trường
@@ -60,7 +60,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="pages/kanban.html" className="nav-link">
+                            <a href="/admin/banner" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Banner
@@ -68,7 +68,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="pages/kanban.html" className="nav-link">
+                            <a href="/admin/department" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Khoa
@@ -76,7 +76,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="pages/kanban.html" className="nav-link">
+                            <a href="/admin/livestream" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Thông báo livestreams
@@ -84,7 +84,7 @@ export default function AdminSidebar() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="pages/kanban.html" className="nav-link">
+                            <a href="/admin/questions" className="nav-link">
                                 <i className="nav-icon fas fa-columns"></i>
                                 <p>
                                     Bảng câu hỏi thường gặp

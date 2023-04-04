@@ -29,6 +29,22 @@ import IndexAdmission from './component/admin/admin-modules/admissions-admission
 import CreateAdmission from './component/admin/admin-modules/admissions-admission/CreateAdmission';
 import DetailAdmission from './component/admin/admin-modules/admissions-admission/DetailAdmission';
 import UpdateAdmission from './component/admin/admin-modules/admissions-admission/UpdateAdmission';
+import IndexSchool from './component/admin/admin-modules/admission-school/IndexSchool';
+import CreateSchool from './component/admin/admin-modules/admission-school/CreateSchool';
+import IndexAdmission from './component/admin/admin-modules/admissions-admission/IndexAdmission';
+import CreateAdmission from './component/admin/admin-modules/admissions-admission/CreateAdmission';
+import IndexType from './component/admin/admin-modules/admission-type/IndexType';
+import CreateType from './component/admin/admin-modules/admission-type/CreateType';
+import IndexBanner from './component/admin/admin-modules/admission-banner/IndexBanner';
+import CreateBanner from './component/admin/admin-modules/admission-banner/CreateBanner';
+import IndexQuestions from './component/admin/admin-modules/admision-questions/IndexQuestions';
+import CreateQuetions from './component/admin/admin-modules/admision-questions/CreateQuestions';
+import IndexDepartment from './component/admin/admin-modules/admision-department/IndexDepartment';
+import CreateDepartment from './component/admin/admin-modules/admision-department/CreateDepartment';
+import IndexComment from './component/admin/admin-modules/admision-comment/IndexComment';
+import CreateComment from './component/admin/admin-modules/admision-comment/CreateComment';
+import IndexLivestreamNotification from './component/admin/admin-modules/admission-livenotification/IndexLivestreamNotification';
+import CreateLivestreamNotification from './component/admin/admin-modules/admission-livenotification/CreateLivestreamNotification';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -76,6 +92,37 @@ root.render(
           <Route exact path="detail/:admissionId" element={<DetailAdmission />} />
           <Route exact path="edit/:admissionId" element={<UpdateAdmission />} />
         </Route>
+        <Route path="school">
+          <Route path="" element={<IndexSchool />} />
+          <Route exact path="create" element={<CreateSchool />} />
+        
+        </Route>
+
+          <Route path="banner">
+            <Route path="" element={<IndexBanner />}/>
+            <Route path="create" element={<CreateBanner />}/>
+          </Route>
+
+          <Route path="questions">
+            <Route path="" element={<IndexQuestions />}/>
+            <Route path="create" element={<CreateQuetions/>}/>
+          </Route>
+
+
+          <Route path="department">
+            <Route path="" element={<IndexDepartment/>}/>
+            <Route path="create" element={<CreateDepartment/>}/>
+          </Route>
+
+          <Route path="comment">
+            <Route path="" element={<IndexComment />}/>
+            <Route path="create" element={<CreateComment/>}/>
+          </Route>
+
+          <Route path="livestream">
+            <Route path="" element={<IndexLivestreamNotification/>}/>
+            <Route path="create" element={<CreateLivestreamNotification/>}/>
+          </Route>
       </Route>
 
       <Route path="admin-login" element={<Login />} />

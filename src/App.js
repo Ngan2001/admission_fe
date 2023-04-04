@@ -24,11 +24,12 @@ function App() {
 }
   return (
     <div>
-      <Header />
+    <Header />
       <Banner />
 
       <div className="">
                     <div className="content-header">
+                        
                         <div className="row">
                             <div className="col-8">
                             <Outlet />

@@ -78,6 +78,10 @@ export default function IndexType() {
         })
     }
 
+    const CreateType = async () =>{
+        
+    }
+
     return (
         <div className="content-wrapper">
             <h1> Loại tin tuyển sinh</h1>

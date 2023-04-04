@@ -27,11 +27,13 @@ export default function IndexUser() {
             setModalShow(true);
         }
     }
+    
     const loadUsers = async () => {
         let url = pageNum === 1 ? endpoints["user"] : `${endpoints["user"]}?page=${pageNum}`;
         await API.get(url).then(res => {
+            console.log(res);
             setUsers(res.data.results);
-
+            
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
                 const  totalPagesTemp = [];
                 for(var i = 1; i <= n_loop; i++) {
