@@ -1,6 +1,8 @@
 import React from "react";
 export default function AdminHeader() {
-
+  const signOut = () => {
+    localStorage.clear();
+  }
   return (
     <header>
       <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -37,7 +39,7 @@ export default function AdminHeader() {
             </div>
           </li>
           <li className="nav-item">
-            <a className="nav-link" role="button" href="/admin-login">
+            <a className="nav-link" role="button" href="/admin-login" onClick={signOut}>
               Đăng xuất
             </a>
           </li>

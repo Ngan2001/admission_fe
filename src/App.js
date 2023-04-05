@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import logo from './logo.svg';
 import './App.css';
 import Header from './component/layouts/Header';
@@ -21,7 +22,22 @@ function App() {
     bottom: '0',
     right: '0',
     marginBottom: '0'
-}
+    };
+    const [isLogged, setIsLogged] = useState(false);
+    const [userAvatarURL, setUserAvatarURL] = useState("");
+
+    useEffect(() => {
+        let checkUserLogin = localStorage.getItem("isLogged");
+        if(checkUserLogin) {
+            setIsLogged(checkUserLogin);
+            let user = JSON.parse(localStorage.getItem("user"));
+
+            if(user != null && user != undefined) {
+                setUserAvatarURL(user.avatar);
+            }
+        }
+    }, []);
+
   return (
     <div>
     <Header />
@@ -96,7 +112,7 @@ function App() {
                                     </div>
                                     <img
                                         className="direct-chat-img"
-                                        src="admin-lte/dist/img/user1-128x128.jpg"
+                                        src={userAvatarURL}
                                         alt="Message User Image"
                                     />
                                     <div className="direct-chat-text">Xin chào</div>

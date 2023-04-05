@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function AdminSidebar() {
+    const [isLogged, setIsLogged] = useState(false);
+    const [userAvatarURL, setUserAvatarURL] = useState("");
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        let checkUserLogin = localStorage.getItem("isLogged");
+        if(checkUserLogin) {
+            setIsLogged(checkUserLogin);
+            let user = JSON.parse(localStorage.getItem("user"));
+
+            if(user != null && user != undefined) {
+                setUserAvatarURL(user.avatar);
+                setUsername(user.username);
+            }
+        }
+    }, []);
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -8,10 +24,10 @@ export default function AdminSidebar() {
 
                 <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div className="image">
-                        <img src="../../../admin-lte/dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
+                        <img src={userAvatarURL} className="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div className="info">
-                        <a href="#" className="d-block">Alexander Pierce</a>
+                        <a href="/admin" className="d-block">{username}</a>
                     </div>
                 </div>
                 <div className="form-inline">

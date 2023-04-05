@@ -52,9 +52,9 @@ root.render(
           <Route path="" element={<DepartmentIndex />} />
           <Route path="detail" element={<DepartmentDetail />} />
         </Route>
-        <Route path="admission">
+        <Route path="admission/:admissionType">
           <Route path="" element={<AdmissionIndex />} />
-          <Route path="detail" element={<AdmissionDetail />} />
+          <Route path="detail/:admissionId" element={<AdmissionDetail />} />
         </Route>
         <Route path="livestream">
           <Route path="" element={<LivestreamIndex />} />

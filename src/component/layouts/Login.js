@@ -5,6 +5,8 @@ import API, { endpoints } from "../../API";
 import jwt_decode from "jwt-decode";
 
 export default function Login() {
+  
+  const [isLoginFail, setIsLoginFail] = useState(false);
   const [pwd, setPwd] = useState("");
   const [user, setUser] = useState("");
 
@@ -39,9 +41,11 @@ export default function Login() {
       "username": user,
       "password": pwd
     }
-    const response = await API.post(endpoints["authenticate"], data);
-    if(response && response.status == 200) {
-        let token = response.data.access;
+    console.log('response');
+    const response = await API.post(endpoints["authenticate"], data).then(res => {
+      console.log(res);
+      if(res && res.status == 200) {
+        let token = res.data.access;
         localStorage.setItem("token", token);
         var decoded = jwt_decode(token);
         localStorage.setItem("user_id", decoded.user_id);
@@ -58,6 +62,10 @@ export default function Login() {
       )
        
     }
+    }).catch(e => {
+      setIsLoginFail(true);
+    });
+    
   }
   return (
     <div className="register-page" style={{ minHeight: "569.6px" }}>
@@ -95,6 +103,13 @@ export default function Login() {
                     <span className="fas fa-lock" />
                   </div>
                 </div>
+                
+                
+              </div>
+              <div className="row">
+              {isLoginFail && (
+                  <span style={{ color: "red" }}>{'Đăng nhập thất bại!'}</span>
+                )}
               </div>
               <div className="row">
                 <div className="col-8">

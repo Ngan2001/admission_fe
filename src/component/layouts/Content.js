@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { constantConfig } from "../../constantConfig";
 import API, { endpoints } from "../../API";
-
+import axios from 'axios';
 
 
 export default function Content() {
         const [types, setTypes] = useState([]);
         const [pageNum, setPageNum] = useState(1);
-
         const loadTypes = new Promise((resolve, reject) => {
             let url = pageNum === 1 ? endpoints["admissionType"] : `${endpoints["admissionType"]}?page=${pageNum}`;
             API.get(url).then(res => {
@@ -45,6 +44,8 @@ export default function Content() {
             fetchData();
         }, []);
 
+        
+
         return (
             <>
                 <h1 className="text-uppercase text-primary mt-3 mb-5">Thông tin tuyển sinh</h1>
@@ -53,7 +54,7 @@ export default function Content() {
                 <>
                     <div key={t.id} className="text-uppercase text-primary mt-3 mb-2 fs-4">{t.type_name}
                     {/* &#x3E; cai nay la dau >  . trinh IDE ko doc duoc  */}
-                        <Link className="float-end fs-6" to="admission">Xem tất cả &#x3E;&#x3E;</Link>
+                        <Link className="float-end fs-6" to={'admission/' + t.id}>Xem tất cả &#x3E;&#x3E;</Link>
                     </div>
                     <ul className="list-group list-group-flush">
                     { t.admissions?.map(a => 
@@ -63,7 +64,7 @@ export default function Content() {
                             </div>
                             <div className="">
                                 <span>
-                                    <Link className="btn-item auction-btn ml-4 mr-2" to={`detail/${a.id}`} style={{color: '#0D4DA1'}}>
+                                    <Link className="btn-item auction-btn ml-4 mr-2" to={`/admission/${t.id}/detail/${a.id}`} style={{color: '#0D4DA1'}}>
                                         {a.title}
                                     </Link>
                                 </span>
