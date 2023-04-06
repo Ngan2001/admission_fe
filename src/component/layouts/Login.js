@@ -5,7 +5,7 @@ import API, { endpoints } from "../../API";
 import jwt_decode from "jwt-decode";
 
 export default function Login() {
-  
+
   const [isLoginFail, setIsLoginFail] = useState(false);
   const [pwd, setPwd] = useState("");
   const [user, setUser] = useState("");
@@ -17,22 +17,26 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [userLogin, setUserLogin] = useState({firstName, lastName, email, username, avatar});
+  const [errorMess, setErrorMess] = useState("");
+  const [userLogin, setUserLogin] = useState({ firstName, lastName, email, username, avatar });
 
   const loadUsers = async (user_id) => {
     await API.get(endpoints[`user`] + `${user_id}`).then(res => {
-        const {last_name, first_name, email, username, avatar} = res.data;
-        let userRes = {
-          firstName: first_name,
-          lastName: last_name,
-          email: email,
-          username: username,
-          avatar: avatar,
-        }
-        setUserLogin(userRes);
-        localStorage.setItem("user", JSON.stringify(userRes));
+      const { last_name, first_name, email, username, avatar, is_superuser } = res.data;
+      let userRes = {
+        firstName: first_name,
+        lastName: last_name,
+        email: email,
+        username: username,
+        avatar: avatar
+      }
+      setUserLogin(userRes);
+
+      localStorage.setItem("is_superuser", JSON.stringify(res.data.is_superuser));
+      localStorage.setItem("user", JSON.stringify(userRes));
+      return userRes;
     })
-}
+  }
 
 
   const handleSubmit = async (e) => {
@@ -40,32 +44,39 @@ export default function Login() {
     const data = {
       "username": user,
       "password": pwd
-    }
+    };
     console.log('response');
-    const response = await API.post(endpoints["authenticate"], data).then(res => {
+    await API.post(endpoints["authenticate"], data).then(res => {
       console.log(res);
-      if(res && res.status == 200) {
+      if (res && res.status == 200) {
         let token = res.data.access;
         localStorage.setItem("token", token);
         var decoded = jwt_decode(token);
         localStorage.setItem("user_id", decoded.user_id);
         localStorage.setItem("isLogged", true);
-        
-      loadUsers(decoded.user_id).then(
-        res => {
-          if (location.pathname.includes('admin-login')) {
-            nav("/admin");
-          } else {
-            nav("/");
+
+        loadUsers(decoded.user_id).then(
+          res => {
+            if (location.pathname.includes('admin-login')) {
+              let isAdmin = JSON.parse(localStorage.getItem("is_superuser"));
+              if(isAdmin == true) {
+                nav("/admin/user");
+              } else {
+                setIsLoginFail(true);
+                setErrorMess("Bạn không có quyền vào trang này!");
+              }
+            } else {
+              nav("/");
+            }
           }
-        }
-      )
-       
-    }
+        )
+
+      }
     }).catch(e => {
       setIsLoginFail(true);
+      setErrorMess("Đăng nhập thất bại!")
     });
-    
+
   }
   return (
     <div className="register-page" style={{ minHeight: "569.6px" }}>
@@ -80,10 +91,10 @@ export default function Login() {
             <p className="login-box-msg">Nhập thông tin</p>
             <form >
               <div className="input-group mb-3">
-                <input type="email" className="form-control" 
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                placeholder="Tên đăng nhập" />
+                <input type="email" className="form-control"
+                  onChange={(e) => setUser(e.target.value)}
+                  value={user}
+                  placeholder="Tên đăng nhập" />
                 <div className="input-group-append">
                   <div className="input-group-text">
                     <span className="fas fa-envelope" />
@@ -103,12 +114,12 @@ export default function Login() {
                     <span className="fas fa-lock" />
                   </div>
                 </div>
-                
-                
+
+
               </div>
               <div className="row">
-              {isLoginFail && (
-                  <span style={{ color: "red" }}>{'Đăng nhập thất bại!'}</span>
+                {isLoginFail && (
+                  <span style={{ color: "red" }}>{errorMess}</span>
                 )}
               </div>
               <div className="row">
@@ -119,7 +130,7 @@ export default function Login() {
                   </div>
                 </div>
                 <div className="col-4">
-                  <button type="submit" className="btn btn-primary btn-block" onClick={handleSubmit}>
+                  <button type="button" className="btn btn-primary btn-block" onClick={(e) => handleSubmit(e)}>
                     Đăng nhập
                   </button>
                 </div>

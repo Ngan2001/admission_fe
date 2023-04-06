@@ -54,7 +54,7 @@ export default function AdminSidebar() {
                         <li className="nav-item">
                             <a href="/admin/school" className="nav-link">
                                 {/* <i className="nav-icon icon-home" ></i> */}
-                                <i class="nav-icon fas fa-home"></i>
+                                <i className="nav-icon fas fa-home"></i>
                                 <p>
                                     Thông tin trường
                                 </p>

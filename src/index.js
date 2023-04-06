@@ -41,6 +41,21 @@ import IndexComment from './component/admin/admin-modules/admision-comment/Index
 import CreateComment from './component/admin/admin-modules/admision-comment/CreateComment';
 import IndexLivestreamNotification from './component/admin/admin-modules/admission-livenotification/IndexLivestreamNotification';
 import CreateLivestreamNotification from './component/admin/admin-modules/admission-livenotification/CreateLivestreamNotification';
+import jwt_decode from "jwt-decode";
+
+if (window.location.href.includes('/admin') && !window.location.href.includes('/admin-login')) {
+  let token = localStorage.getItem('token');
+
+
+  if (!token) {
+     window.location.href = '/admin-login';
+  } else {
+     var decoded = jwt_decode(token);
+     if (decoded.exp < Date.now() / 1000) {
+        window.location.href = '/admin-login';
+     }
+  }
+}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
