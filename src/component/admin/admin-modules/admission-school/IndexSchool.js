@@ -1,8 +1,31 @@
-import React from "react";
-import { Outlet } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import API, { endpoints } from "../../../../API";
+import { useNavigate, useParams } from 'react-router-dom';
+import { Outlet, Link } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { constantConfig } from "../../../../constantConfig";
 
 export default function IndexSchool() {
+    const nav = useNavigate();
+    const [school, setSchool] = useState([]);
+    const [totalPages, setTotalPages] = useState([]);
+    const [pageNum, setPageNum] = useState(1);
+    // thông báo xóa thành công 
+    const [show, setShow] = useState(false);
+    const [refreshKey, setRefreshKey] = useState(0); //to refresh user list after delete the user
+    // hện model có mún xóa hong
+    const [modalShow, setModalShow] = useState(false);
+    const [deleteUserId, setDeleteUserId] = useState(null);
 
+    const handleModalClose = () => setModalShow(false);
+    const handleModalShow = (schoolId) => {
+        return () => {
+            setDeleteUserId(schoolId);
+            setModalShow(true);
+        }
+    }
     return (
         <div className="content-wrapper">
             <h1> Thông tin về trường</h1>

@@ -34,6 +34,7 @@ export let endpoints = {
     'admissionType': '/admission-type/',
     'admission': '/admission/',
     'banner': '/banner/',
+    'department': '/department/',
 }
 const API = axios.create({
     baseURL: "http://localhost:8000",

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import UpdateDepartment from './component/admin/admin-modules/admision-department/UpdateDepartment';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -106,34 +107,36 @@ root.render(
         <Route path="school">
           <Route path="" element={<IndexSchool />} />
           <Route exact path="create" element={<CreateSchool />} />
-        
+
         </Route>
 
-          <Route path="banner">
-            <Route path="" element={<IndexBanner />}/>
-            <Route path="create" element={<CreateBanner />}/>
-          </Route>
+        <Route path="banner">
+          <Route path="" element={<IndexBanner />} />
+          <Route path="create" element={<CreateBanner />} />
+        </Route>
 
-          <Route path="questions">
-            <Route path="" element={<IndexQuestions />}/>
-            <Route path="create" element={<CreateQuetions/>}/>
-          </Route>
+        <Route path="questions">
+          <Route path="" element={<IndexQuestions />} />
+          <Route path="create" element={<CreateQuetions />} />
+        </Route>
 
 
-          <Route path="department">
-            <Route path="" element={<IndexDepartment/>}/>
-            <Route path="create" element={<CreateDepartment/>}/>
-          </Route>
+        <Route path="department">
+          <Route path="" element={<IndexDepartment />} />
+          <Route path="create" element={<CreateDepartment />} />
+          <Route exact path="edit/:departmentId" element={<UpdateDepartment />} />
 
-          <Route path="comment">
-            <Route path="" element={<IndexComment />}/>
-            <Route path="create" element={<CreateComment/>}/>
-          </Route>
+        </Route>
 
-          <Route path="livestream">
-            <Route path="" element={<IndexLivestreamNotification/>}/>
-            <Route path="create" element={<CreateLivestreamNotification/>}/>
-          </Route>
+        <Route path="comment">
+          <Route path="" element={<IndexComment />} />
+          <Route path="create" element={<CreateComment />} />
+        </Route>
+
+        <Route path="livestream">
+          <Route path="" element={<IndexLivestreamNotification />} />
+          <Route path="create" element={<CreateLivestreamNotification />} />
+        </Route>
       </Route>
 
       <Route path="admin-login" element={<Login />} />

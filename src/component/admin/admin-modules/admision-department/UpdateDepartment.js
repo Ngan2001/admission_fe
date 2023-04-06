@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API, { endpoints } from "../../../../API";
 import $ from 'jquery';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-export default function CreateDepartment() {
+export default function UpdateDepartment() {
     const nav = useNavigate();
+    let imageDefault = "/assets/images/default-thumbnail.jpg";
+    let { departmentId } = useParams();
+
     const [image, setImage] = useState("");
     const [name, setName] = useState("");
     const [introduction, setIntroduction] = useState("");
@@ -58,7 +63,7 @@ export default function CreateDepartment() {
         setImage(URL.createObjectURL(e.target.files[0]))
     }
  
-    const createDepartment = async () => {
+    const updateDepartment = async () => {
         setErrors({});
         if (!handleSubmit()) {
             return;
@@ -105,6 +110,20 @@ export default function CreateDepartment() {
         });
         // end dòng này là gọi API
     }
+    useEffect(() => {
+        const loadDepartment = async () => {
+            await API.get(endpoints[`department`] + `${departmentId}`).then(res => {
+                const {image, name, content, video_url, website} = res.data;
+
+                setImage(image);
+                setName(name);
+                setContent(content);
+                setVideo(video_url);
+                setWebsite(website);
+            })
+        }
+        loadDepartment();
+    }, []);
     return (
         <>
             <Modal show={modalShow} onHide={handleModalClose}>
@@ -137,6 +156,7 @@ export default function CreateDepartment() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
+                                value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
                         </div>
@@ -146,6 +166,7 @@ export default function CreateDepartment() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
+                                value={content}
                                 onChange={(e) => setContent(e.target.value)}
                             />
                         </div>
@@ -155,6 +176,7 @@ export default function CreateDepartment() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
+                                    value={website}
                                     onChange={(e) => setWebsite(e.target.value)}
                                 />
                             </div>
@@ -164,6 +186,7 @@ export default function CreateDepartment() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
+                                    value={video}
                                     onChange={(e) => setVideo(e.target.value)}
                                 />
                             </div>
@@ -174,7 +197,7 @@ export default function CreateDepartment() {
                             <a type="button" className="btn btn-primary mr-2" href="/admin/department" >
                                 Trở về
                             </a>
-                            <button type="button" className="btn btn-primary" onClick={createDepartment}>
+                            <button type="button" className="btn btn-primary" onClick={updateDepartment}>
                                 Tạo mới
                             </button>
                         </div>
