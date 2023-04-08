@@ -14,7 +14,7 @@ import Register from './component/layouts/Register';
 import DepartmentIndex from './component/department/DepartmentIndex';
 import { Outlet } from "react-router-dom";
 import RightSidebar from './component/layouts/RightSidebar';
-import jwt_decode from "jwt-decode";
+
 
 
 function App() {
@@ -36,20 +36,6 @@ function App() {
                 setUserAvatarURL(user.avatar);
             }
         }
-
-        if (window.location.href.includes('/admin') && !window.location.href.includes('/admin-login')) {
-            let token = localStorage.getItem('token');
-   
-   
-            if (!token) {
-               window.location.href = '/admin-login';
-            } else {
-               var decoded = jwt_decode(token);
-               if (decoded.exp < Date.now() / 1000) {
-                  window.location.href = '/admin-login';
-               }
-            }
-         }
     }, []);
 
   return (

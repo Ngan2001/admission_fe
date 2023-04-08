@@ -108,22 +108,35 @@ export default function CreateUser() {
         // end chuyển hình ảnh sang dạng base64
         var myData = dataURL;
 
-        const data = {
-            'first_name': firstName,
-            'last_name': lastName,
-            'birthday_date': birthday,
-            'phone': phone,
-            'email': email,
-            'address': address,
-            username,
-            password,
-            passwordConfirm,
-            'avatar': myData,
-            'is_superuser': true
-        };
+        // const data = {
+        //     'first_name': firstName,
+        //     'last_name': lastName,
+        //     'birthday_date': birthday,
+        //     'phone': phone,
+        //     'email': email,
+        //     'address': address,
+        //     username,
+        //     password,
+        //     passwordConfirm,
+        //     'avatar': myData,
+        //     'is_superuser': true
+        // };
+
+        let formData = new FormData(); 
+        formData.append('first_name', firstName);
+        formData.append('last_name', lastName);
+        formData.append('birthday_date', birthday);
+        formData.append('phone', phone);
+        formData.append('email', email);
+        formData.append('address', address);
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('passwordConfirm', passwordConfirm);
+        formData.append('avatar', myData);
+        formData.append('is_superuser', true);
 
         // dòng này là gọi API
-        const response = await API.post(endpoints["user"], data).then(res => {
+        const response = await API.post(endpoints["user"], formData).then(res => {
             setCreateMessage('Tạo mới thành công!')
             handleModalShow();
             setTimeout(() => {

@@ -49,12 +49,18 @@ if (window.location.href.includes('/admin') && !window.location.href.includes('/
 
 
   if (!token) {
-     window.location.href = '/admin-login';
+    window.location.href = '/admin-login';
   } else {
-     var decoded = jwt_decode(token);
-     if (decoded.exp < Date.now() / 1000) {
-        window.location.href = '/admin-login';
-     }
+    var decoded = jwt_decode(token);
+    if (decoded.exp < Date.now() / 1000) {
+      window.location.href = '/admin-login';
+    }
+
+    let isAdmin = JSON.parse(localStorage.getItem("is_superuser"));
+    console.log(isAdmin);
+    if (!isAdmin) {
+      window.location.href = '/admin-login';
+    }
   }
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
