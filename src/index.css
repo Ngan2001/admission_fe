@@ -16,3 +16,9 @@ code {
   background: #007bff;
   color: white;
 }
+
+a:hover {
+  color: #007bff !important;
+  text-decoration: underline;
+}
+

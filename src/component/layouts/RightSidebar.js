@@ -3,7 +3,7 @@ export default function RightSidebar() {
         return (
             <>
                 <div className="card" style={{ width: "100%" }}>
-                    <iframe width="100%" height="170px" src="https://www.youtube.com/embed/Us1okcXiHpA" title="Giới thiệu Trường ĐH Mở TP. Hồ Chí Minh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="100%" height="170px" src="https://www.youtube.com/embed/Us1okcXiHpA" title="Giới thiệu Trường ĐH Mở TP. Hồ Chí Minh" frameorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                 </div>
 
                 <div className="card mb-3" style={{ width: "100%" }}>

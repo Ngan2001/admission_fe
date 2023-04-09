@@ -148,7 +148,7 @@ export default function IndexDepartment() {
                             </a>
                         </li>
                         {totalPages.map(page => 
-                            <li className="page-item">
+                            <li key={page} className="page-item">
                                 <Link className={"page-link " + (pageNum == page ? 'link-active' : '')} to={ page == 1 ? `` : `/admin/user/?page=${page}`} onClick={onClickPage(page)}>
                                             {page}
                                 </Link>
