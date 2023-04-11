@@ -77,7 +77,19 @@ export default function UpdateUser() {
             password
         };
 
-        await API.put(endpoints["user"] + `${userId}/`, data).then(res => {
+        let formData = new FormData(); 
+        formData.append('first_name', firstName);
+        formData.append('last_name', lastName);
+        formData.append('birthday_date', birthday);
+        formData.append('phone', phone);
+        formData.append('email', email);
+        formData.append('address', address);
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('avatar', myData);
+        formData.append('is_superuser', true);
+
+        await API.put(endpoints["user"] + `${userId}/`, formData).then(res => {
             setUpdateMessage('Cập nhật thành công!')
             handleModalShow();
             setTimeout(() => {

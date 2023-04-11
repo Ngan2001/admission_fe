@@ -7,6 +7,8 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function CreateLivestreamNotification() {
     const nav = useNavigate();
+    let {livestreamId } = useParams();
+    const [live, setLive]=useState({});
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -43,7 +45,7 @@ export default function CreateLivestreamNotification() {
         setErrors(errorsChk);
         return formIsValid;
     }
-    const createLivestream = async () => {
+    const updateLivestream = async () => {
         setErrors({});
         if (!handleSubmit()) {
             return;
@@ -60,7 +62,7 @@ export default function CreateLivestreamNotification() {
         };
 
         // dòng này là gọi API
-        const response = await API.post(endpoints["livestreamsnotification"], data).then(res => {
+        const response = await API.put(endpoints["livestreamsnotification"]+ `${livestreamId}/`, data).then(res => {
             setCreateMessage('Tạo mới thành công!')
             handleModalShow();
             setTimeout(() => {
@@ -80,6 +82,17 @@ export default function CreateLivestreamNotification() {
         });
         // end dòng này là gọi API
     }
+    const loadLive = async () => {
+        await API.get(endpoints["livestreamsnotification"]).then(res => {
+            
+            setLi(res.data.results);
+        })
+    }
+
+    useEffect(() => {
+        loadLive();
+    }, []);
+
     return (
         <>
             <Modal show={modalShow} onHide={handleModalClose}>

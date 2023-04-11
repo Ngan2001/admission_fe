@@ -142,6 +142,8 @@ root.render(
         <Route path="livestream">
           <Route path="" element={<IndexLivestreamNotification />} />
           <Route path="create" element={<CreateLivestreamNotification />} />
+          <Route exact path="edit/:livestreamId" element={<UpdateDepartment />} />
+        
         </Route>
       </Route>
 

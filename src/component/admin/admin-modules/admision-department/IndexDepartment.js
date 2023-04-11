@@ -85,7 +85,7 @@ export default function IndexDepartment() {
                 <Modal.Header closeButton>
                     <Modal.Title>Xác nhận</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Bạn có muốn xóa người dùng?</Modal.Body>
+                <Modal.Body>Bạn có muốn xóa khoa này?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleModalClose}>
                         Đóng
@@ -148,7 +148,7 @@ export default function IndexDepartment() {
                             </a>
                         </li>
                         {totalPages.map(page => 
-                            <li key={page} className="page-item">
+                            <li className="page-item">
                                 <Link className={"page-link " + (pageNum == page ? 'link-active' : '')} to={ page == 1 ? `` : `/admin/user/?page=${page}`} onClick={onClickPage(page)}>
                                             {page}
                                 </Link>

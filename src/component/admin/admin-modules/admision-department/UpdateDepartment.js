@@ -90,7 +90,7 @@ export default function UpdateDepartment() {
         };
 
         // dòng này là gọi API
-        const response = await API.post(endpoints["department"], data).then(res => {
+        const response = await API.put(endpoints["department"]  + `${departmentId}/`, data).then(res => {
             setCreateMessage('Tạo mới thành công!')
             handleModalShow();
             setTimeout(() => {
