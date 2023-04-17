@@ -9,7 +9,7 @@ export default function RightSidebar() {
                 <div className="card mb-3" style={{ width: "100%" }}>
                     <div className="row g-0">
                         <div className="col-md-4">
-                            <img src="assets/images/question.jpg" className="img-fluid rounded-start" alt="..." />
+                            <img src="../../../assets/images/question.jpg" className="img-fluid rounded-start" alt="..." />
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
@@ -23,7 +23,7 @@ export default function RightSidebar() {
                 <div className="card mb-3" style={{ width: "100%" }}>
                     <div className="row g-0">
                         <div className="col-md-4">
-                            <img src="assets/images/school-logo.png" className="img-fluid rounded-start" alt="..." />
+                            <img src="../../../assets/images/school-logo.png" className="img-fluid rounded-start" alt="..." />
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
@@ -35,7 +35,7 @@ export default function RightSidebar() {
 
 
                 <div className="card" style={{ width: "100%" }}>
-                    <img src="assets/images/khoa.jpg" className="card-img-top" alt="Khoa" />
+                    <img src="../../../assets/images/khoa.jpg" className="card-img-top" alt="Khoa" />
                     <div className="card-body">
                         <p className="card-text">
                             <a href="department">Các khoa/ nghành</a>
@@ -44,7 +44,7 @@ export default function RightSidebar() {
                 </div>
 
                 <div className="card" style={{ width: "100%" }}>
-                    <img src="assets/images/livestream.jpg" className="card-img-top" alt="livestream" />
+                    <img src="../../../assets/images/livestream.jpg" className="card-img-top" alt="livestream" />
                     <div className="card-body">
                         <p className="card-text">
                             <a href="livestream">Lịch livestream</a>
