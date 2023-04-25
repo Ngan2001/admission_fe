@@ -37,8 +37,6 @@ export default function UpdateUser() {
                 setEmail(email);
                 setUsername(username);
                 setAvatar(avatar);
-                
-                
                 const parseBirthday = birthday_date.toString().split("T");
                 setBirthday(parseBirthday[0]);
                 setPhone(phone);

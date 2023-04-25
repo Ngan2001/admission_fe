@@ -127,7 +127,8 @@ export default function CreateLivestreamNotification() {
                                         onChange={(e) => setStartDate(e.target.value)} />
                                         <span style={{ color: "red" }}>{errors['startDate']}</span>
                                 </div>
-                                <div className="form-group">
+                            </div>
+                            <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Thời lượng livestraem</label>
                                 <input
                                     type="text"
@@ -136,7 +137,6 @@ export default function CreateLivestreamNotification() {
                                 onChange={(e) => setTime(e.target.value)}
 
                                 />
-                            </div>
                             </div>
                         </div>
                         <div className="card-footer text-center">

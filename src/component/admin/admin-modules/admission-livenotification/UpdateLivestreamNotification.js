@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API, { endpoints } from "../../../../API";
 import $ from 'jquery';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-export default function CreateLivestreamNotification() {
+
+export default function UpdateLivestreamNotification() {
     const nav = useNavigate();
-    let {livestreamId } = useParams();
-    const [live, setLive]=useState({});
+    let { livestreamId } = useParams();
+    const [live, setLive] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -21,9 +24,6 @@ export default function CreateLivestreamNotification() {
     const handleSubmit = () => {
         let errorsChk = {};
         let formIsValid = true;
-
-
-
 
         if (title == null || title == "") {
             errorsChk["title"] = "Không được để trống";
@@ -62,7 +62,7 @@ export default function CreateLivestreamNotification() {
         };
 
         // dòng này là gọi API
-        const response = await API.put(endpoints["livestreamsnotification"]+ `${livestreamId}/`, data).then(res => {
+        const response = await API.put(endpoints["livestreamsnotification"] + `${livestreamId}/`, data).then(res => {
             setCreateMessage('Tạo mới thành công!')
             handleModalShow();
             setTimeout(() => {
@@ -81,15 +81,21 @@ export default function CreateLivestreamNotification() {
             }, 2000);
         });
         // end dòng này là gọi API
-    }
-    const loadLive = async () => {
-        await API.get(endpoints["livestreamsnotification"]).then(res => {
-            
-            setLi(res.data.results);
-        })
+
     }
 
     useEffect(() => {
+        const loadLive = async () => {
+            await API.get(endpoints[`livestreamsnotification`] + `${livestreamId}`).then(res => {
+                const { title, content, start_date, time } = res.data;
+
+                setTitle(title);
+                setContent(content);
+                const parseStartDay = start_date.toString().split("T");
+                setStartDate(parseStartDay[0]);
+                setTime(time);
+            })
+        }
         loadLive();
     }, []);
 
@@ -119,7 +125,8 @@ export default function CreateLivestreamNotification() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
 
                                 />
                             </div>
@@ -129,7 +136,8 @@ export default function CreateLivestreamNotification() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                onChange={(e) => setContent(e.target.value)}
+                                    value={content}
+                                    onChange={(e) => setContent(e.target.value)}
 
                                 />
                             </div>
@@ -137,26 +145,28 @@ export default function CreateLivestreamNotification() {
                                 <label>Thời gian livestraem</label>
                                 <div className="input-group">
                                     <input id="startDate" className="form-control" type="date"
+                                        value={startDate}
                                         onChange={(e) => setStartDate(e.target.value)} />
-                                        <span style={{ color: "red" }}>{errors['startDate']}</span>
+                                    <span style={{ color: "red" }}>{errors['startDate']}</span>
                                 </div>
                                 <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Thời lượng livestraem</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="exampleInputPassword1"
-                                onChange={(e) => setTime(e.target.value)}
+                                    <label htmlFor="exampleInputPassword1">Thời lượng livestraem</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="exampleInputPassword1"
+                                        value={time}
+                                        onChange={(e) => setTime(e.target.value)}
 
-                                />
-                            </div>
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="card-footer text-center">
                             <a type="button" className="btn btn-primary mr-2" href="/admin/livestream" >
                                 Trở về
                             </a>
-                            <button type="button" className="btn btn-primary" onClick={createLivestream}>
+                            <button type="button" className="btn btn-primary" onClick={updateLivestream}>
                                 Tạo mới
                             </button>
                         </div>

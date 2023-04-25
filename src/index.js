@@ -43,6 +43,8 @@ import CreateComment from './component/admin/admin-modules/admision-comment/Crea
 import IndexLivestreamNotification from './component/admin/admin-modules/admission-livenotification/IndexLivestreamNotification';
 import CreateLivestreamNotification from './component/admin/admin-modules/admission-livenotification/CreateLivestreamNotification';
 import jwt_decode from "jwt-decode";
+import UpdateLivestreamNotification from './component/admin/admin-modules/admission-livenotification/UpdateLivestreamNotification';
+import UpdateQuetions from './component/admin/admin-modules/admision-questions/UpdateQuestions';
 
 if (window.location.href.includes('/admin') && !window.location.href.includes('/admin-login')) {
   let token = localStorage.getItem('token');
@@ -124,6 +126,8 @@ root.render(
         <Route path="questions">
           <Route path="" element={<IndexQuestions />} />
           <Route path="create" element={<CreateQuetions />} />
+          <Route exact path="edit/:questionId" element={<UpdateQuetions/>} />
+
         </Route>
 
 
@@ -142,7 +146,7 @@ root.render(
         <Route path="livestream">
           <Route path="" element={<IndexLivestreamNotification />} />
           <Route path="create" element={<CreateLivestreamNotification />} />
-          <Route exact path="edit/:livestreamId" element={<UpdateDepartment />} />
+          <Route exact path="edit/:livestreamId" element={<UpdateLivestreamNotification />} />
         
         </Route>
       </Route>

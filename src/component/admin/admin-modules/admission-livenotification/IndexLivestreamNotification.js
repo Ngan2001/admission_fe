@@ -30,9 +30,11 @@ export default function IndexLivestreamNotification() {
         }
     }
     const loadLivestreamNotifications = async () => {
+
         let url = pageNum === 1 ? endpoints["livestreamsnotification"] : `${endpoints["livestreamsnotification"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-            console.log(res);
+            // console.log(res);
+            console.log(res.data.results);
             setLivestreamNotifications(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
@@ -110,15 +112,21 @@ export default function IndexLivestreamNotification() {
                                 <th style={{ width: 10 }}>#</th>
                                 <th>Tiêu đề</th>
                                 <th>Nội dung</th>
-                                <th style={{ width: 40 }}>Thao tác</th>
+                                <th>Thời gian livestream</th>
+                                <th>Thời lượng livestream</th>
+
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {livestreamNotifications.map((lsn, index) =>
+                            {livestreamNotifications.map((lsn, index) =>
                                 <tr key={lsn.id}>
                                     <td>{index + 1}</td>
                                     <td>{lsn.title}</td>
                                     <td>{lsn.content}</td>
+                                    <td>{lsn.start_date}</td>
+                                    <td>{lsn.time}</td>
+
                                     <td>
                                         <button type="button" className="btn btn-default mr-2" onClick={goEdit(lsn.id)}>
                                             <i className="fas fa-pencil-alt"></i>
@@ -141,13 +149,13 @@ export default function IndexLivestreamNotification() {
                                 «
                             </a>
                         </li>
-                        {totalPages.map(page => 
+                        {totalPages.map(page =>
                             <li className="page-item">
-                                <Link className={"page-link " + (pageNum == page ? 'link-active' : '')} to={ page == 1 ? `` : `/admin/livestreamnotification/?page=${page}`} onClick={onClickPage(page)}>
-                                            {page}
+                                <Link className={"page-link " + (pageNum == page ? 'link-active' : '')} to={page == 1 ? `` : `/admin/livestreamnotification/?page=${page}`} onClick={onClickPage(page)}>
+                                    {page}
                                 </Link>
                             </li>
-                            )
+                        )
                         }
 
                         <li className="page-item">

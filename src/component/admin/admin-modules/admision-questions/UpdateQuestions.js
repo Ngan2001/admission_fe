@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API, { endpoints } from "../../../../API";
 import $ from 'jquery';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import 'react-quill/dist/quill.snow.css';
 
 
-export default function CreateQuetions() {
+export default function UpdateQuetions() {
     const nav = useNavigate();
+    let { questionId } = useParams();
     const [question, setQuestion] = useState("");
     const [user, setUser] = useState("");
     const [answer, setAnswer] = useState("");
@@ -41,7 +43,7 @@ export default function CreateQuetions() {
         setErrors(errorsChk);
         return formIsValid;
     }
-    const createQuestion = async () => {
+    const updateQuestion = async () => {
         setErrors({});
         if (!handleSubmit()) {
             return;
@@ -58,8 +60,8 @@ export default function CreateQuetions() {
         };
 
         // dòng này là gọi API
-        const response = await API.post(endpoints["admissionsquestion"], data).then(res => {
-            setCreateMessage('Tạo mới thành công!')
+        const response = await API.put(endpoints["admissionsquestion"], `${questionId}/`, data).then(res => {
+            setCreateMessage('Cập nhập thành công!')
             handleModalShow();
             setTimeout(() => {
                 handleModalClose();
@@ -70,7 +72,7 @@ export default function CreateQuetions() {
             let errorsCheck = {};
             setErrors(errorsCheck);
 
-            setCreateMessage('Tạo mới thất bại!')
+            setCreateMessage('Cập nhập thất bại!')
             handleModalShow();
             setTimeout(() => {
                 handleModalClose();
@@ -78,6 +80,20 @@ export default function CreateQuetions() {
         });
         // end dòng này là gọi API
     }
+    useEffect(() => {
+        const loadQuestions = async () => {
+            await API.get(endpoints[`admissionsquestion`] + `${questionId}`).then(res => {
+                const { question, user_id, is_answer, date_answer } = res.data;
+
+                setQuestion(question);
+                setUser(user_id);
+                setAnswer(is_answer);
+                const parseDateAnswer = date_answer.toString().split("T");
+                setDateAnswer(parseDateAnswer[0]);
+            })
+        }
+        loadQuestions();
+    }, []);
     return (
         <>
             <Modal show={modalShow} onHide={handleModalClose}>
@@ -104,6 +120,7 @@ export default function CreateQuetions() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
+                                    value={question}
                                     onChange={(e) => setQuestion(e.target.value)}
 
                                 />
@@ -114,8 +131,7 @@ export default function CreateQuetions() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                    // value={user}
-                                    // value={user.first_name}
+                                    value={user}
                                     onChange={(e) => setUser(e.target.value)}
 
                                 />
@@ -126,16 +142,18 @@ export default function CreateQuetions() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                onChange={(e) => setAnswer(e.target.value)}
+                                    value={answer}
+                                    onChange={(e) => setAnswer(e.target.value)}
 
                                 />
                             </div>
                             <div className="form-group">
                                 <label>Thời gian</label>
                                 <div className="input-group">
-                                    <input id="startDate" className="form-control" type="date"
+                                    <input id="dateAnswer" className="form-control" type="date"
+                                        value={dateAnswer}
                                         onChange={(e) => setDateAnswer(e.target.value)} />
-                                        <span style={{ color: "red" }}>{errors['dateAnswer']}</span>
+                                    <span style={{ color: "red" }}>{errors['dateAnswer']}</span>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +161,8 @@ export default function CreateQuetions() {
                             <a type="button" className="btn btn-primary mr-2" href="/admin/questions" >
                                 Trở về
                             </a>
-                            <button type="button" className="btn btn-primary" onClick={createQuestion}>
-                                Tạo mới
+                            <button type="button" className="btn btn-primary" onClick={updateQuestion}>
+                                Cập Nhập
                             </button>
                         </div>
                     </form>
