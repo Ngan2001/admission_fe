@@ -119,7 +119,7 @@ export default function IndexUser() {
                     <table className="table table-bordered">
                         <thead>
                             <tr>
-                                <th style={{ width: 10 }}>#</th>
+                                <th style={{ width: 10 }}>id</th>
                                 <th>Tên người dùng</th>
                                 <th>Số điện thoại</th>
                                 <th>Email</th>

@@ -37,6 +37,7 @@ export let endpoints = {
     'department': '/department/',
     'livestreamsnotification': '/livestreamsnotification/',
     'admissionsquestion': '/admissionsquestion/',
+    'comment': '/comment/'
 }
 const API = axios.create({
     baseURL: "http://localhost:8000",

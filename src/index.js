@@ -30,8 +30,6 @@ import IndexAdmission from './component/admin/admin-modules/admissions-admission
 import CreateAdmission from './component/admin/admin-modules/admissions-admission/CreateAdmission';
 import DetailAdmission from './component/admin/admin-modules/admissions-admission/DetailAdmission';
 import UpdateAdmission from './component/admin/admin-modules/admissions-admission/UpdateAdmission';
-import IndexSchool from './component/admin/admin-modules/admission-school/IndexSchool';
-import CreateSchool from './component/admin/admin-modules/admission-school/CreateSchool';
 import IndexBanner from './component/admin/admin-modules/admission-banner/IndexBanner';
 import CreateBanner from './component/admin/admin-modules/admission-banner/CreateBanner';
 import IndexQuestions from './component/admin/admin-modules/admision-questions/IndexQuestions';
@@ -45,6 +43,7 @@ import CreateLivestreamNotification from './component/admin/admin-modules/admiss
 import jwt_decode from "jwt-decode";
 import UpdateLivestreamNotification from './component/admin/admin-modules/admission-livenotification/UpdateLivestreamNotification';
 import UpdateQuetions from './component/admin/admin-modules/admision-questions/UpdateQuestions';
+import UniversityIndex from './component/university/UniversityIndex';
 
 if (window.location.href.includes('/admin') && !window.location.href.includes('/admin-login')) {
   let token = localStorage.getItem('token');
@@ -88,10 +87,18 @@ root.render(
           <Route path="" element={<FAQIndex />} />
           <Route path="question" element={<QuestionForm />} />
         </Route>
+        <Route path="university">
+          <Route path="" element={< UniversityIndex/>} />
+          {/* <Route path="question" element={<QuestionForm />} /> */}
+        </Route>
       </Route>
 
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
+
+
+
+
 
       <Route path="admin" element={<AdminContainer />}>
         <Route path="user">
@@ -112,11 +119,7 @@ root.render(
           <Route exact path="detail/:admissionId" element={<DetailAdmission />} />
           <Route exact path="edit/:admissionId" element={<UpdateAdmission />} />
         </Route>
-        <Route path="school">
-          <Route path="" element={<IndexSchool />} />
-          <Route exact path="create" element={<CreateSchool />} />
-
-        </Route>
+        
 
         <Route path="banner">
           <Route path="" element={<IndexBanner />} />

@@ -107,7 +107,7 @@ export default function IndexQuestions() {
                     <table className="table table-bordered">
                         <thead>
                             <tr>
-                                <th style={{ width: 10 }}>#</th>
+                                <th style={{ width: 10 }}>id</th>
                                 <th>Câu hỏi</th>
                                 <th>Người đặt câu hỏi</th>
                                 <th>Câu trả lời</th>

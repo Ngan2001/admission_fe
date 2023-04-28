@@ -114,7 +114,7 @@ export default function CreateQuetions() {
                                     type="text"
                                     className="form-control"
                                     id="exampleInputPassword1"
-                                    // value={user}
+                                    // value={user.id}
                                     // value={user.first_name}
                                     onChange={(e) => setUser(e.target.value)}
 
