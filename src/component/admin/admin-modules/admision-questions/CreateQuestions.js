@@ -9,7 +9,6 @@ import Modal from 'react-bootstrap/Modal';
 export default function CreateQuetions() {
     const nav = useNavigate();
     const [question, setQuestion] = useState("");
-    const [user, setUser] = useState("");
     const [answer, setAnswer] = useState("");
     const [dateAnswer, setDateAnswer] = useState("");
     const [createMessage, setCreateMessage] = useState("");
@@ -26,10 +25,7 @@ export default function CreateQuetions() {
             formIsValid = false;
         }
 
-        if (user == null || user == "") {
-            errorsChk["user"] = "Không được để trống";
-            formIsValid = false;
-        }
+        
         if (answer == null || answer == "") {
             errorsChk["answer"] = "Không được để trống";
             formIsValid = false;
@@ -51,9 +47,9 @@ export default function CreateQuetions() {
         const data = {
 
             question,
-            'user_id': user,
-            'is_answer': answer,
+            'answer': answer,
             'date_answer': dateAnswer,
+    
 
         };
 
@@ -105,18 +101,6 @@ export default function CreateQuetions() {
                                     className="form-control"
                                     id="exampleInputPassword1"
                                     onChange={(e) => setQuestion(e.target.value)}
-
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Người đặt câu hỏi </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="exampleInputPassword1"
-                                    // value={user.id}
-                                    // value={user.first_name}
-                                    onChange={(e) => setUser(e.target.value)}
 
                                 />
                             </div>

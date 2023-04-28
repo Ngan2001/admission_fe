@@ -28,10 +28,7 @@ export default function UpdateQuetions() {
             formIsValid = false;
         }
 
-        if (user == null || user == "") {
-            errorsChk["user"] = "Không được để trống";
-            formIsValid = false;
-        }
+       
         if (answer == null || answer == "") {
             errorsChk["answer"] = "Không được để trống";
             formIsValid = false;
@@ -53,14 +50,14 @@ export default function UpdateQuetions() {
         const data = {
 
             question,
-            'user_id': user,
-            'is_answer': answer,
+            'answer': answer,
             'date_answer': dateAnswer,
+
 
         };
 
         // dòng này là gọi API
-        const response = await API.put(endpoints["admissionsquestion"], `${questionId}/`, data).then(res => {
+        const response = await API.put(endpoints["admissionsquestion"] + `${questionId}/`, data).then(res => {
             setCreateMessage('Cập nhập thành công!')
             handleModalShow();
             setTimeout(() => {
@@ -83,11 +80,10 @@ export default function UpdateQuetions() {
     useEffect(() => {
         const loadQuestions = async () => {
             await API.get(endpoints[`admissionsquestion`] + `${questionId}`).then(res => {
-                const { question, user_id, is_answer, date_answer } = res.data;
+                const { question, answer, date_answer } = res.data;
 
                 setQuestion(question);
-                setUser(user_id);
-                setAnswer(is_answer);
+                setAnswer(answer);
                 const parseDateAnswer = date_answer.toString().split("T");
                 setDateAnswer(parseDateAnswer[0]);
             })
@@ -124,18 +120,9 @@ export default function UpdateQuetions() {
                                     onChange={(e) => setQuestion(e.target.value)}
 
                                 />
+                                <span style={{ color: "red" }}>{errors['question']}</span>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Người đặt câu hỏi </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="exampleInputPassword1"
-                                    value={user}
-                                    onChange={(e) => setUser(e.target.value)}
-
-                                />
-                            </div>
+                          
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Câu trả lời</label>
                                 <input
@@ -144,8 +131,9 @@ export default function UpdateQuetions() {
                                     id="exampleInputPassword1"
                                     value={answer}
                                     onChange={(e) => setAnswer(e.target.value)}
-
+                                
                                 />
+                                <span style={{ color: "red" }}>{errors['answer']}</span>
                             </div>
                             <div className="form-group">
                                 <label>Thời gian</label>

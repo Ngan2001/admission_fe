@@ -14,7 +14,6 @@ export default function UpdateDepartment() {
 
     const [image, setImage] = useState("");
     const [name, setName] = useState("");
-    const [introduction, setIntroduction] = useState("");
     const [content, setContent] = useState("");
     const [website, setWebsite] = useState("");
     const [video, setVideo] = useState("");
@@ -198,7 +197,7 @@ export default function UpdateDepartment() {
                                 Trở về
                             </a>
                             <button type="button" className="btn btn-primary" onClick={updateDepartment}>
-                                Tạo mới
+                                Cập nhập
                             </button>
                         </div>
                     </form>

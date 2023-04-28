@@ -1,31 +1,55 @@
-import React, { Component } from "react";
-import { Outlet, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-export default class DepartmentIndex extends Component {
+import Modal from 'react-bootstrap/Modal';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { constantConfig } from "../../constantConfig";
+import API, { endpoints } from "../../API";
+import { Link, Outlet } from 'react-router-dom';
+export default function DepartmentIndex () {
+    const [departments, setDepartments] = useState([]);
+    const [totalPages, setTotalPages] = useState([]);
+    const [pageNum, setPageNum] = useState(1);
 
-    render() {
+    const loadDepartment = async () => {
+
+        let url = pageNum === 1 ? endpoints["department"] : `${endpoints["department"]}?page=${pageNum}`;
+        await API.get(url).then(res => {
+          // console.log(res);
+          console.log(res.data.results);
+    
+          setDepartments(res.data.results);
+    
+          var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
+          const totalPagesTemp = [];
+          for (var i = 1; i <= n_loop; i++) {
+            totalPagesTemp.push(i);
+          }
+          setTotalPages(totalPagesTemp);
+        })
+      }
+      useEffect(() => {
+        loadDepartment();
+    }, []);
         return (
             <div className="row">
-                <div className="col-6 card" style={{ width: "18rem" }}>
-                    <img src="assets/images/khoa-tai-chinh.png" className="card-img-top" alt="..." />
-                    <div className="card-body">
-                        <p className="card-text">
-                            <Link className="btn btn-outline-success" to="detail">Khoa tài chính ngân hàng</Link>
-                        </p>
-                    </div>
-                </div>
-
-                <div className="col-6 card" style={{ width: "18rem" }}>
-                    <img src="assets/images/khoa-cntt.png" className="card-img-top" alt="..." />
-                    <div className="card-body">
-                        <p className="card-text">
-                            <Link className="btn btn-outline-success" to="detail"> Khoa Công nghệ thông tin</Link>
-                        </p>
-                    </div>
-                </div>
-
-
-                <div className="col-6 card" style={{ width: "18rem" }}>
+                {
+                    departments.map(item => 
+                        <div className="col-6 card" style={{ width: "18rem" }}>
+                            <img src={item.image} className="card-img-top" alt="..." style={{ width: "490px", height:"300px" }}/>
+                            <div className="card-body">
+                                <p className="card-text" style={{textAlign:"center"}}>
+                                    <Link className="btn btn-outline-success" to="detail" >{item.name}</Link>
+                                </p>
+                            </div>
+                        
+                        </div>
+        
+                        )
+        
+                }
+                
+                {/* <div className="col-6 card" style={{ width: "18rem" }}>
                     <img src="assets/images/khoa-ngoai-ngu.png" className="card-img-top" alt="..." />
                     <div className="card-body">
                         <p className="card-text">
@@ -42,10 +66,10 @@ export default class DepartmentIndex extends Component {
                             <Link className="btn btn-outline-success" to="detail">Khoa kế toán kiểm toán</Link>
                         </p>
                     </div>
-                </div>
+                </div> */}
                 <Outlet />
             </div>
 
         );
-    }
+    
 }

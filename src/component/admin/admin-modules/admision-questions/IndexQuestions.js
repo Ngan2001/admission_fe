@@ -12,6 +12,7 @@ import 'react-quill/dist/quill.snow.css';
 export default function IndexQuestions() {
     const nav = useNavigate();
     const [questions, setQuestions] = useState([]);
+    const [dateAnswer, setDateAnswer] = useState([]);
     const [totalPages, setTotalPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
     // thông báo xóa thành công 
@@ -34,6 +35,10 @@ export default function IndexQuestions() {
         await API.get(url).then(res => {
             // console.log(res);
             console.log(res.data.results);
+
+            res.data.results.forEach(item => {
+                item.date_answer = item.date_answer.toString().split("T")[0];
+            })
             setQuestions(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
@@ -109,7 +114,6 @@ export default function IndexQuestions() {
                             <tr>
                                 <th style={{ width: 10 }}>id</th>
                                 <th>Câu hỏi</th>
-                                <th>Người đặt câu hỏi</th>
                                 <th>Câu trả lời</th>
                                 <th>Thời gian</th>
                                 <th>Thao tác</th>
@@ -120,8 +124,7 @@ export default function IndexQuestions() {
                                 <tr key={questions.id}>
                                     <td>{index + 1}</td>
                                     <td>{questions.question}</td>
-                                    <td>{questions.user_id}</td>
-                                    <td>{questions.is_answer}</td>
+                                    <td>{questions.answer}</td>
                                     <td>{questions.date_answer}</td>
 
                                     <td>
