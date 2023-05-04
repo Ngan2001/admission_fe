@@ -22,3 +22,8 @@ a:hover {
   text-decoration: underline;
 }
 
+.page-link:hover, .page-link:focus {
+  background: #007bff;
+  color: white !important;
+}
+

@@ -12,7 +12,7 @@ export default function AdminSidebar() {
             let user = JSON.parse(localStorage.getItem("user"));
 
             if(user != null && user != undefined) {
-                setUserAvatarURL(user.avatar);
+                setUserAvatarURL(user.avatar ? user.avatar : '../assets/images/no-avatar.jpg');
                 setUsername(user.username);
             }
         }
@@ -28,16 +28,6 @@ export default function AdminSidebar() {
                     </div>
                     <div className="info">
                         <a href="/admin" className="d-block">{username}</a>
-                    </div>
-                </div>
-                <div className="form-inline">
-                    <div className="input-group" data-widget="sidebar-search">
-                        <input className="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
-                        <div className="input-group-append">
-                            <button className="btn btn-sidebar">
-                                <i className="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <nav className="mt-2">

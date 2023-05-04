@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { constantConfig } from "../../constantConfig";
-import API, { endpoints } from "../../API";
+import API, { endpoints, port } from "../../API";
 import axios from 'axios';
 
 
@@ -16,9 +16,14 @@ export default function Content() {
           });
 
         const loadAdmissions = new Promise((resolve, reject) => {
-            let url = pageNum === 1 ? endpoints["admission"] : `${endpoints["admission"]}?page=${pageNum}`;
+
+            let url = endpoints["admission"] + "get-all-no-paging/";
+            
             API.get(url).then(res => {
-                resolve(res.data.results);
+                if(res.data) {
+                    res.data.forEach(item => item.thumbnail_image = port['baseURL'] + item.thumbnail_image);
+                }
+                resolve(res.data);
             });
         });
 
@@ -27,11 +32,13 @@ export default function Content() {
                 let admissionsRes = values[0];
                 let typesRes = values[1];
                 let tempTypes = [];
+                const MAX_ADMISSIONS = 5;
                 for(let i = 0; i < typesRes.length; i++) {
                     tempTypes.push(typesRes[i]);
                     let admissionsByType = admissionsRes.filter(item => item.admission_type == typesRes[i].id);
                     if(admissionsByType && admissionsByType.length > 0) {
-                        tempTypes[i]['admissions'] = admissionsByType;
+                        
+                        tempTypes[i]['admissions'] = admissionsByType.slice(0, 5); // in requirement, just 5 records
                     } else {
                         tempTypes[i]['admissions'] = [];
                     }

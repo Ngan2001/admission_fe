@@ -39,6 +39,10 @@ export let endpoints = {
     'admissionsquestion': '/admissionsquestion/',
     'comment': '/comment/'
 }
+
+export let port = {
+   'baseURL': 'http://localhost:8000',
+}
 const API = axios.create({
     baseURL: "http://localhost:8000",
 

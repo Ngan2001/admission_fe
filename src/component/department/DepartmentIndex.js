@@ -32,6 +32,11 @@ export default function DepartmentIndex () {
         loadDepartment();
     }, []);
         return (
+            <>
+            <div className="row">
+                <h1 className="text-uppercase text-primary mt-3 mb-2">Danh sách khoa</h1>
+            </div>
+            
             <div className="row">
                 {
                     departments.map(item => 
@@ -69,6 +74,7 @@ export default function DepartmentIndex () {
                 </div> */}
                 <Outlet />
             </div>
+            </>
 
         );
     

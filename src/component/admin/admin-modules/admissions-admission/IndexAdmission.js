@@ -121,11 +121,11 @@ export default function IndexAdmission() {
                         <tbody>
                         {admissions.map((u, index) =>
                                 <tr key={u.id}>
-                                    <td>{index + 1}</td>
+                                    <td>{ ((pageNum < 0 ? 0 : pageNum - 1) * constantConfig.PAGESIZE) + index + 1}</td>
                                     <td>
                                         {u.title}
                                     </td>
-                                    <td>{u.admission_type}</td>
+                                    <td>{u.admission_type_name}</td>
                                     <td>
                                         <Link className="btn-item auction-btn mr-2" to={`detail/${u.id}`}>
                                             Xem chi tiết
@@ -150,31 +150,14 @@ export default function IndexAdmission() {
                 </div>
                 <div className="card-footer clearfix">
                     <ul className="pagination pagination-sm m-0 float-right">
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                «
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                1
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                2
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                3
-                            </a>
-                        </li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                »
-                            </a>
-                        </li>
+                        {totalPages.map(page => 
+                            <li key={page} className="page-item">
+                                <Link className={"page-link " + (pageNum == page ? 'link-active' : '')}  onClick={onClickPage(page)}>
+                                            {page}
+                                </Link>
+                            </li>
+                            )
+                        }
                     </ul>
                 </div>
             </div>

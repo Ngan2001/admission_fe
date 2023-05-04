@@ -43,7 +43,7 @@ import CreateLivestreamNotification from './component/admin/admin-modules/admiss
 import jwt_decode from "jwt-decode";
 import UpdateLivestreamNotification from './component/admin/admin-modules/admission-livenotification/UpdateLivestreamNotification';
 import UpdateQuetions from './component/admin/admin-modules/admision-questions/UpdateQuestions';
-import UniversityIndex from './component/university/UniversityIndex';
+// import UniversityIndex from './component/university/UniversityIndex';
 
 if (window.location.href.includes('/admin') && !window.location.href.includes('/admin-login')) {
   let token = localStorage.getItem('token');
@@ -88,8 +88,8 @@ root.render(
           <Route path="question" element={<QuestionForm />} />
         </Route>
         <Route path="university">
-          <Route path="" element={< UniversityIndex/>} />
-          {/* <Route path="question" element={<QuestionForm />} /> */}
+          {/* <Route path="" element={< UniversityIndex/>} /> */}
+          <Route path="question" element={<QuestionForm />} />
         </Route>
       </Route>
 
