@@ -34,6 +34,7 @@ export let endpoints = {
     'admissionType': '/admission-type/',
     'admission': '/admission/',
     'banner': '/banner/',
+    'school': '/school/',
     'department': '/department/',
     'livestreamsnotification': '/livestreamsnotification/',
     'admissionsquestion': '/admissionsquestion/',
