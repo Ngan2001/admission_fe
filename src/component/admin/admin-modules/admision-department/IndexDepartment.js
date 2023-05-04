@@ -60,6 +60,7 @@ export default function IndexDepartment() {
 
     useEffect(() => {
     }, [pageNum]);
+    
     const deleteDepartment = () => {
         handleModalClose();
         API.delete(endpoints["department"] + `${deleteDepartmentId}/`).then(res => {
@@ -75,7 +76,6 @@ export default function IndexDepartment() {
     const goEdit = (departmentId) => {
         return () => {
             nav(`edit/${departmentId}`);
-            //         // bằng với  "edit/" + userId
         }
     }
     return (

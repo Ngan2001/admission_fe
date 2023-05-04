@@ -44,6 +44,10 @@ import jwt_decode from "jwt-decode";
 import UpdateLivestreamNotification from './component/admin/admin-modules/admission-livenotification/UpdateLivestreamNotification';
 import UpdateQuetions from './component/admin/admin-modules/admision-questions/UpdateQuestions';
 // import UniversityIndex from './component/university/UniversityIndex';
+import IndexSchool from './component/admin/admin-modules/admission-school/IndexSchool';
+import CreateSchool from './component/admin/admin-modules/admission-school/CreateSchool';
+import UniversityIndex from './component/university/UniversityIndex';
+import UpdateSchool from './component/admin/admin-modules/admission-school/UpdateSchool';
 
 if (window.location.href.includes('/admin') && !window.location.href.includes('/admin-login')) {
   let token = localStorage.getItem('token');
@@ -73,7 +77,7 @@ root.render(
         <Route path="" element={<Content />} />
         <Route path="department">
           <Route path="" element={<DepartmentIndex />} />
-          <Route path="detail" element={<DepartmentDetail />} />
+          <Route path="detail/:departmentId" element={<DepartmentDetail />} />
         </Route>
         <Route path="admission/:admissionType">
           <Route path="" element={<AdmissionIndex />} />
@@ -88,8 +92,8 @@ root.render(
           <Route path="question" element={<QuestionForm />} />
         </Route>
         <Route path="university">
-          {/* <Route path="" element={< UniversityIndex/>} /> */}
-          <Route path="question" element={<QuestionForm />} />
+          <Route path="" element={< UniversityIndex/>} />
+          {/* <Route path="question" element={<QuestionForm />} > */}
         </Route>
       </Route>
 
@@ -129,7 +133,15 @@ root.render(
         <Route path="questions">
           <Route path="" element={<IndexQuestions />} />
           <Route path="create" element={<CreateQuetions />} />
+          <Route exact path="detail/:questionId" element={<DetailAdmission />} />
           <Route exact path="edit/:questionId" element={<UpdateQuetions/>} />
+
+        </Route>
+
+        <Route path="school">
+          <Route path="" element={<IndexSchool />} />
+          <Route path="create" element={<CreateSchool />} />
+          <Route exact path="edit/:schoolId" element={<UpdateSchool />} />
 
         </Route>
 

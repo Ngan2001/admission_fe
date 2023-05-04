@@ -1,65 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API, { endpoints } from "../../../../API";
 import $ from 'jquery';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import ReactQuill from "react-quill";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-export default function CreateDepartment() {
+export default function UpdateSchool() {
+
     const nav = useNavigate();
-    const [image, setImage] = useState("");
-    const [name, setName] = useState("");
-    const [introduction, setIntroduction] = useState("");
+    let imageDefault = "/assets/images/default-thumbnail.jpg";
+    let { schoolId } = useParams();
+
+    const [logo, setLogo] = useState("");
+    const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [website, setWebsite] = useState("");
-    const [video, setVideo] = useState("");
     const [createMessage, setCreateMessage] = useState("");
     const [errors, setErrors] = useState({});
-
     const [modalShow, setModalShow] = useState(false);
     const handleModalClose = () => setModalShow(false);
     const handleModalShow = () => setModalShow(true);
-
     const handleSubmit = () => {
         var imgSrc = document.getElementById("blah").src;
         let errorsChk = {};
         let formIsValid = true;
 
-
-
-        if (image == null || image == "") {
-            errorsChk["image"] = "Không được để trống";
-            formIsValid = false;
-        }
-        if (name == null || name == "") {
-            errorsChk["name"] = "Không được để trống";
+        if (logo == null || logo == "") {
+            errorsChk["logo"] = "Không được để trống";
             formIsValid = false;
         }
 
+
+        if (title == null || title == "") {
+            errorsChk["title"] = "Không được để trống";
+            formIsValid = false;
+        }
         if (content == null || content == "") {
             errorsChk["content"] = "Không được để trống";
             formIsValid = false;
         }
-
-        if (website == null || website == "") {
-            errorsChk["website"] = "Không được để trống";
-            formIsValid = false;
-        }
-
-        if (video == null || video == "") {
-            errorsChk["video"] = "Không được để trống";
-            formIsValid = false;
-        }
-
         setErrors(errorsChk);
         return formIsValid;
     }
     const handleChangeImage = e => {
-        setImage(URL.createObjectURL(e.target.files[0]))
+        setLogo(URL.createObjectURL(e.target.files[0]))
     }
- 
-    const createDepartment = async () => {
+
+    const updateSchool = async () => {
         setErrors({});
         if (!handleSubmit()) {
             return;
@@ -76,29 +64,29 @@ export default function CreateDepartment() {
         dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
         // end chuyển hình ảnh sang dạng base64
         var myData = dataURL;
-
         const data = {
-            image : myData,
-            name,
+
+            logo: myData,
+            title,
             content,
-            website,
-            'video_url': video,
+
+
         };
 
         // dòng này là gọi API
-        const response = await API.post(endpoints["department"], data).then(res => {
+        const response = await API.put(endpoints["school"] + `${schoolId}/`, data).then(res => {
             setCreateMessage('Tạo mới thành công!')
             handleModalShow();
             setTimeout(() => {
                 handleModalClose();
-                nav("/admin/department")
+                nav("/admin/school")
             }, 2000);
 
         }).catch(e => {
             let errorsCheck = {};
             setErrors(errorsCheck);
 
-            setCreateMessage('Tạo mới thất bại!')
+            setCreateMessage('Cập nhập thất bại!')
             handleModalShow();
             setTimeout(() => {
                 handleModalClose();
@@ -106,7 +94,22 @@ export default function CreateDepartment() {
         });
         // end dòng này là gọi API
     }
+    useEffect(() => {
+        const loadSchool = async () => {
+            await API.get(endpoints[`school`] + `${schoolId}`).then(res => {
+                const {logo, title, content } = res.data;
+
+                setLogo(logo);
+                setTitle(title);
+                setContent(content);
+                
+            })
+        }
+        loadSchool();
+    }, []);
     return (
+
+
         <>
             <Modal show={modalShow} onHide={handleModalClose}>
                 <Modal.Header closeButton>
@@ -122,23 +125,25 @@ export default function CreateDepartment() {
             <div className="content-wrapper">
                 <div className="card card-primary">
                     <div className="card-header">
-                        <h3 className="card-title">Tạo thông tin về khoa</h3>
+                        <h3 className="card-title">Chỉnh sửa thông tin</h3>
                     </div>
                     <form>
-                    <div className="form-group">
-                                <label htmlFor="exampleInputFile">Chọn ảnh</label>
-                                <div className="input-group">
-                                    <img id="blah" alt="your image" src={image} style={{ height: '200px', width: '900px', border: '1px solid black', marginRight: '15px' }} />
-                                    <input type="file" onChange={handleChangeImage} />
-                                </div>
-                            </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Tên khoa</label>
+                            <label htmlFor="exampleInputFile">Chọn logo</label>
+                            <div className="input-group">
+                                <img id="blah" alt="your image" src={logo} style={{ height: '100px', width: '100px', border: '1px solid black', marginRight: '15px' }} />
+                                <input type="file" onChange={handleChangeImage} />
+                            </div>
+                            <span style={{ color: "red" }}>{errors['thumbnailImage']}</span>
+
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputPassword1">Tên trường</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
@@ -146,32 +151,16 @@ export default function CreateDepartment() {
                             <ReactQuill theme="snow" value={content} onChange={setContent} />
                             <span style={{ color: "red" }}>{errors['content']}</span>
                         </div>
-                        <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Website</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="exampleInputPassword1"
-                                    onChange={(e) => setWebsite(e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Video</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="exampleInputPassword1"
-                                    onChange={(e) => setVideo(e.target.value)}
-                                />
-                            </div>
-                            
+
+
+
                         <div className="card-body">
                         </div>
                         <div className="card-footer text-center">
-                            <a type="button" className="btn btn-primary mr-2" href="/admin/department" >
+                            <a type="button" className="btn btn-primary mr-2" href="/admin/school" >
                                 Trở về
                             </a>
-                            <button type="button" className="btn btn-primary" onClick={createDepartment}>
+                            <button type="button" className="btn btn-primary" onClick={updateSchool}>
                                 Tạo mới
                             </button>
                         </div>
@@ -181,4 +170,5 @@ export default function CreateDepartment() {
             </div>
         </>
     )
+
 }

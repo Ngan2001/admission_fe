@@ -161,13 +161,8 @@ export default function UpdateDepartment() {
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Nội dung</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="exampleInputPassword1"
-                                value={content}
-                                onChange={(e) => setContent(e.target.value)}
-                            />
+                            <ReactQuill theme="snow" value={content} onChange={setContent} />
+                            <span style={{ color: "red" }}>{errors['content']}</span>
                         </div>
                         <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Website</label>

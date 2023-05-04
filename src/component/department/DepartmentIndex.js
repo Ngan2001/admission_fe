@@ -44,7 +44,7 @@ export default function DepartmentIndex () {
                             <img src={item.image} className="card-img-top" alt="..." style={{ width: "490px", height:"300px" }}/>
                             <div className="card-body">
                                 <p className="card-text" style={{textAlign:"center"}}>
-                                    <Link className="btn btn-outline-success" to="detail" >{item.name}</Link>
+                                    <Link className="btn btn-outline-success" to={'detail/' + item.id} >{item.name}</Link>
                                 </p>
                             </div>
                         
