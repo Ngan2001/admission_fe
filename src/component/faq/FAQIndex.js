@@ -22,9 +22,9 @@ export default function FAQIndex() {
       // console.log(res);
       console.log(res.data.results);
 
-      res.data.results.forEach(item => {
-        item.date_answer = item.date_answer.toString().split("T")[0];
-      })
+      // res.data.results.forEach(item => {
+      //   item.date_answer = item.date_answer.toString().split("T")[0];
+      // })
       setQuestions(res.data.results);
 
       var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
@@ -50,35 +50,28 @@ export default function FAQIndex() {
         <div className="card-body">
           <div className="accordion" id="accordionExample">
 {
-  questions.map(item => 
+  questions.map((item,index) => 
     <div className="accordion-item">
               <h2 className="accordion-header" id="headingOne">
                 <button
                   className="accordion-button"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
+                  data-bs-target={'#collapse' + index}
                   aria-expanded="true"
-                  aria-controls="collapseOne"
+                  aria-controls={'collapse' + index}
                 >
-                  {item.question}
+                  {index + 1} {'. '} {item.question}
                 </button>
               </h2>
               <div
-                id="collapseOne"
-                className="accordion-collapse collapse show"
+                id={'collapse' + index}
+                className={"accordion-collapse collapse "}
                 aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample"
               >
                 <div className="accordion-body">
-                  {item.answer}
-                  {/* <strong>This is the first item's accordion body.</strong> It is shown by
-                  default, until the collapse plugin adds the appropriate classes that we
-                  use to style each element. These classes control the overall appearance,
-                  as well as the showing and hiding via CSS transitions. You can modify
-                  any of this with custom CSS or overriding our default variables. It's
-                  also worth noting that just about any HTML can go within the{" "}
-                  <code>.accordion-body</code>, though the transition does limit overflow. */}
+                 {item.answer}
                 </div>
               </div>
             </div>

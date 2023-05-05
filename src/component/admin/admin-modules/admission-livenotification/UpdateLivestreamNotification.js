@@ -91,8 +91,9 @@ export default function UpdateLivestreamNotification() {
 
                 setTitle(title);
                 setContent(content);
-                const parseStartDay = start_date.toString().split("T");
-                setStartDate(parseStartDay[0]);
+                // const parseStartDay = start_date.toString().split("T");
+                // setStartDate(parseStartDay[0]);
+                setStartDate(start_date.slice(0, 16)); 
                 setTime(time);
             })
         }
@@ -144,9 +145,12 @@ export default function UpdateLivestreamNotification() {
                             <div className="form-group">
                                 <label>Thời gian livestraem</label>
                                 <div className="input-group">
-                                    <input id="startDate" className="form-control" type="date"
+                                    {/* <input id="startDate" className="form-control" type="date"
                                         value={startDate}
-                                        onChange={(e) => setStartDate(e.target.value)} />
+                                        onChange={(e) => setStartDate(e.target.value)} /> */}
+ 
+                                    <input type="datetime-local" id="startDate" value={startDate} className="form-control"
+                                        name="startDate" onChange={(e) => setStartDate(e.target.value)}/>
                                     <span style={{ color: "red" }}>{errors['startDate']}</span>
                                 </div>
                                 <div className="form-group">

@@ -30,10 +30,10 @@ export default function CreateQuetions() {
             errorsChk["answer"] = "Không được để trống";
             formIsValid = false;
         }
-        if (dateAnswer == null || dateAnswer == "") {
-            errorsChk["dateAnswer"] = "Không được để trống";
-            formIsValid = false;
-        }
+        // if (dateAnswer == null || dateAnswer == "") {
+        //     errorsChk["dateAnswer"] = "Không được để trống";
+        //     formIsValid = false;
+        // }
         setErrors(errorsChk);
         return formIsValid;
     }
@@ -45,12 +45,9 @@ export default function CreateQuetions() {
 
 
         const data = {
-
             question,
-            'answer': answer,
-            'date_answer': dateAnswer,
-    
-
+            'answer': answer
+            // 'date_answer': dateAnswer,
         };
 
         // dòng này là gọi API
@@ -114,14 +111,14 @@ export default function CreateQuetions() {
 
                                 />
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <label>Thời gian</label>
                                 <div className="input-group">
                                     <input id="startDate" className="form-control" type="date"
                                         onChange={(e) => setDateAnswer(e.target.value)} />
                                         <span style={{ color: "red" }}>{errors['dateAnswer']}</span>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="card-footer text-center">
                             <a type="button" className="btn btn-primary mr-2" href="/admin/questions" >

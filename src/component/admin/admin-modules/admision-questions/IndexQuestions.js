@@ -36,9 +36,9 @@ export default function IndexQuestions() {
             // console.log(res);
             console.log(res.data.results);
 
-            res.data.results.forEach(item => {
-                item.date_answer = item.date_answer.toString().split("T")[0];
-            })
+            // res.data.results.forEach(item => {
+            //     item.date_answer = item.date_answer.toString().split("T")[0];
+            // })
             setQuestions(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));

@@ -86,7 +86,7 @@ export default function AdminSidebar() {
                             <a href="/admin/livestream" className="nav-link">
                                 <i className="nav-icon fas fa-bell"></i>
                                 <p>
-                                    Thông báo livestreams
+                                    Lịch livestream
                                 </p>
                             </a>
                         </li>

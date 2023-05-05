@@ -33,8 +33,11 @@ export default function IndexLivestreamNotification() {
 
         let url = pageNum === 1 ? endpoints["livestreamsnotification"] : `${endpoints["livestreamsnotification"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-            // console.log(res);
-            console.log(res.data.results);
+            res.data.results.forEach(item => {
+                let startDateFormatArr = new Date(item.start_date).toISOString().slice(0, 16).split("T");
+                item.start_date = startDateFormatArr[0] + ", Lúc " + startDateFormatArr[1];
+            });
+            
             setLivestreamNotifications(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));

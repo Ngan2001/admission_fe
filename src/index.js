@@ -85,7 +85,7 @@ root.render(
         </Route>
         <Route path="livestream">
           <Route path="" element={<LivestreamIndex />} />
-          <Route path="detail" element={<LivestreamDetail />} />
+          <Route path="detail/:livestreamId" element={<LivestreamDetail />} />
         </Route>
         <Route path="faq">
           <Route path="" element={<FAQIndex />} />

@@ -123,13 +123,16 @@ export default function CreateLivestreamNotification() {
                             <div className="form-group">
                                 <label>Thời gian livestraem</label>
                                 <div className="input-group">
-                                    <input id="startDate" className="form-control" type="date"
-                                        onChange={(e) => setStartDate(e.target.value)} />
-                                        <span style={{ color: "red" }}>{errors['startDate']}</span>
+                                    {/* <input id="startDate" className="form-control" type="date"
+                                        onChange={(e) => setStartDate(e.target.value)} /> */}
+
+                                    <input type="datetime-local" id="meetinstartDate"  className="form-control"
+                                        name="startDate" onChange={(e) => setStartDate(e.target.value)}/>
+                                    <span style={{ color: "red" }}>{errors['startDate']}</span>
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Thời lượng livestraem</label>
+                                <label htmlFor="exampleInputPassword1">Thời lượng livestream (phút)</label>
                                 <input
                                     type="text"
                                     className="form-control"
