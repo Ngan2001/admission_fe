@@ -143,12 +143,13 @@ export default function UpdateSchool() {
                                 type="text"
                                 className="form-control"
                                 id="exampleInputPassword1"
+                                value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Nội dung</label>
-                            <ReactQuill theme="snow" value={content} onChange={setContent} />
+                            <ReactQuill style={{"white-space": "normal"}}   theme="snow" value={content} onChange={setContent} />
                             <span style={{ color: "red" }}>{errors['content']}</span>
                         </div>
 
@@ -161,7 +162,7 @@ export default function UpdateSchool() {
                                 Trở về
                             </a>
                             <button type="button" className="btn btn-primary" onClick={updateSchool}>
-                                Tạo mới
+                                Cập nhật
                             </button>
                         </div>
                     </form>

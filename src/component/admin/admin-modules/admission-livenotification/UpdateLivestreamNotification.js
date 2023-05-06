@@ -143,7 +143,7 @@ export default function UpdateLivestreamNotification() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Thời gian livestraem</label>
+                                <label>Thời gian livestream</label>
                                 <div className="input-group">
                                     {/* <input id="startDate" className="form-control" type="date"
                                         value={startDate}
@@ -154,7 +154,7 @@ export default function UpdateLivestreamNotification() {
                                     <span style={{ color: "red" }}>{errors['startDate']}</span>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputPassword1">Thời lượng livestraem</label>
+                                    <label htmlFor="exampleInputPassword1">Thời lượng livestream(phút)</label>
                                     <input
                                         type="text"
                                         className="form-control"

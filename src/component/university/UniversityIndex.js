@@ -42,7 +42,7 @@ export default function UniversityIndex() {
             <div className="col-12 card" style={{ width: "18rem" }}>
               <div className="card-body">
                 <p className="card-text" >
-                  <h1 className="btn btn-outline-success" to="detail" >{item.title}</h1>
+                  <h1>{item.title}</h1>
                   {/* <h1 className="btn btn-outline-success" to="detail" >{item.content}</h1> */}
                   <div dangerouslySetInnerHTML={{ __html: item.content }} />;
 

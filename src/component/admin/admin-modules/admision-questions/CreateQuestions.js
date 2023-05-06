@@ -10,7 +10,7 @@ export default function CreateQuetions() {
     const nav = useNavigate();
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
-    const [dateAnswer, setDateAnswer] = useState("");
+    // const [dateAnswer, setDateAnswer] = useState("");
     const [createMessage, setCreateMessage] = useState("");
     const [errors, setErrors] = useState({});
     const [modalShow, setModalShow] = useState(false);
@@ -45,13 +45,13 @@ export default function CreateQuetions() {
 
 
         const data = {
-            question,
+            'question_content': question,
             'answer': answer
             // 'date_answer': dateAnswer,
         };
 
         // dòng này là gọi API
-        const response = await API.post(endpoints["admissionsquestion"], data).then(res => {
+        const response = await API.post(endpoints["frequentlyquestions"], data).then(res => {
             setCreateMessage('Tạo mới thành công!')
             handleModalShow();
             setTimeout(() => {

@@ -11,9 +11,9 @@ export default function UpdateQuetions() {
     const nav = useNavigate();
     let { questionId } = useParams();
     const [question, setQuestion] = useState("");
-    const [user, setUser] = useState("");
+    // const [user, setUser] = useState("");
     const [answer, setAnswer] = useState("");
-    const [dateAnswer, setDateAnswer] = useState("");
+    // const [dateAnswer, setDateAnswer] = useState("");
     const [createMessage, setCreateMessage] = useState("");
     const [errors, setErrors] = useState({});
     const [modalShow, setModalShow] = useState(false);
@@ -33,10 +33,10 @@ export default function UpdateQuetions() {
             errorsChk["answer"] = "Không được để trống";
             formIsValid = false;
         }
-        if (dateAnswer == null || dateAnswer == "") {
-            errorsChk["dateAnswer"] = "Không được để trống";
-            formIsValid = false;
-        }
+        // if (dateAnswer == null || dateAnswer == "") {
+        //     errorsChk["dateAnswer"] = "Không được để trống";
+        //     formIsValid = false;
+        // }
         setErrors(errorsChk);
         return formIsValid;
     }
@@ -49,15 +49,15 @@ export default function UpdateQuetions() {
 
         const data = {
 
-            question,
+            'question_content': question,
             'answer': answer,
-            'date_answer': dateAnswer,
+            // 'date_answer': dateAnswer,
 
 
         };
 
         // dòng này là gọi API
-        const response = await API.put(endpoints["admissionsquestion"] + `${questionId}/`, data).then(res => {
+        const response = await API.put(endpoints["frequentlyquestions"] + `${questionId}/`, data).then(res => {
             setCreateMessage('Cập nhập thành công!')
             handleModalShow();
             setTimeout(() => {
@@ -79,13 +79,13 @@ export default function UpdateQuetions() {
     }
     useEffect(() => {
         const loadQuestions = async () => {
-            await API.get(endpoints[`admissionsquestion`] + `${questionId}`).then(res => {
-                const { question, answer, date_answer } = res.data;
+            await API.get(endpoints[`frequentlyquestions`] + `${questionId}`).then(res => {
+                const { question_content, answer  } = res.data;
 
-                setQuestion(question);
+                setQuestion(question_content);
                 setAnswer(answer);
-                const parseDateAnswer = date_answer.toString().split("T");
-                setDateAnswer(parseDateAnswer[0]);
+                // const parseDateAnswer = date_answer.toString().split("T");
+                // setDateAnswer(parseDateAnswer[0]);
             })
         }
         loadQuestions();
@@ -135,7 +135,7 @@ export default function UpdateQuetions() {
                                 />
                                 <span style={{ color: "red" }}>{errors['answer']}</span>
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <label>Thời gian</label>
                                 <div className="input-group">
                                     <input id="dateAnswer" className="form-control" type="date"
@@ -143,7 +143,7 @@ export default function UpdateQuetions() {
                                         onChange={(e) => setDateAnswer(e.target.value)} />
                                     <span style={{ color: "red" }}>{errors['dateAnswer']}</span>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="card-footer text-center">
                             <a type="button" className="btn btn-primary mr-2" href="/admin/questions" >

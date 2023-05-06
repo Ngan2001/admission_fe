@@ -106,7 +106,7 @@ export default function IndexSchool() {
                             <tr>
                                 <th style={{ width: 10 }}>id</th>
                                 <th>Logo trường</th>
-                                <th>Tiêu đề</th>
+                                <th>Tên trường</th>
                                 <th>Nội dung</th>
                                 <th style={{ width: 40 }}>Thao tác</th>
                             </tr>

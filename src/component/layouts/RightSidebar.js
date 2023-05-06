@@ -27,7 +27,7 @@ export default function RightSidebar() {
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
-                                <h5 className="card-title"><a href="university">Tổng quan về OU</a></h5>
+                                <h5 className="card-title"><a href="/university">Tổng quan về OU</a></h5>
                             </div>
                         </div>
                     </div>

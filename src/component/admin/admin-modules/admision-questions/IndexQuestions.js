@@ -12,7 +12,7 @@ import 'react-quill/dist/quill.snow.css';
 export default function IndexQuestions() {
     const nav = useNavigate();
     const [questions, setQuestions] = useState([]);
-    const [dateAnswer, setDateAnswer] = useState([]);
+    // const [dateAnswer, setDateAnswer] = useState([]);
     const [totalPages, setTotalPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
     // thông báo xóa thành công 
@@ -31,7 +31,7 @@ export default function IndexQuestions() {
     }
     const loadQuestions = async () => {
 
-        let url = pageNum === 1 ? endpoints["admissionsquestion"] : `${endpoints["admissionsquestion"]}?page=${pageNum}`;
+        let url = pageNum === 1 ? endpoints["frequentlyquestions"] : `${endpoints["frequentlyquestions"]}?page=${pageNum}`;
         await API.get(url).then(res => {
             // console.log(res);
             console.log(res.data.results);
@@ -67,7 +67,7 @@ export default function IndexQuestions() {
     }, [pageNum]);
     const deleteQuestions = () => {
         handleModalClose();
-        API.delete(endpoints["admissionsquestion"] + `${deleteQuestionId}/`).then(res => {
+        API.delete(endpoints["frequentlyquestions"] + `${deleteQuestionId}/`).then(res => {
             if (res && res.status == 204) {
                 setRefreshKey(oldKey => oldKey + 1);
                 setShow(true);
@@ -115,7 +115,7 @@ export default function IndexQuestions() {
                                 <th style={{ width: 10 }}>id</th>
                                 <th>Câu hỏi</th>
                                 <th>Câu trả lời</th>
-                                <th>Thời gian</th>
+                                {/* <th>Thời gian</th> */}
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -123,9 +123,9 @@ export default function IndexQuestions() {
                         {questions.map((questions, index) =>
                                 <tr key={questions.id}>
                                     <td>{index + 1}</td>
-                                    <td>{questions.question}</td>
+                                    <td>{questions.question_content}</td>
                                     <td>{questions.answer}</td>
-                                    <td>{questions.date_answer}</td>
+                                    {/* <td>{questions.date_answer}</td> */}
 
                                     <td>
                                         <button type="button" className="btn btn-default mr-2" onClick={goEdit(questions.id)}>

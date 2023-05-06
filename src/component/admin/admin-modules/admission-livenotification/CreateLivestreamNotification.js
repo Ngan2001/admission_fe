@@ -121,7 +121,7 @@ export default function CreateLivestreamNotification() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Thời gian livestraem</label>
+                                <label>Thời gian livestream</label>
                                 <div className="input-group">
                                     {/* <input id="startDate" className="form-control" type="date"
                                         onChange={(e) => setStartDate(e.target.value)} /> */}

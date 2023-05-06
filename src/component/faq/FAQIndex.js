@@ -17,7 +17,7 @@ export default function FAQIndex() {
 
   const loadQuestions = async () => {
 
-    let url = pageNum === 1 ? endpoints["admissionsquestion"] : `${endpoints["admissionsquestion"]}?page=${pageNum}`;
+    let url = pageNum === 1 ? endpoints["frequentlyquestions"] : `${endpoints["frequentlyquestions"]}?page=${pageNum}`;
     await API.get(url).then(res => {
       // console.log(res);
       console.log(res.data.results);
@@ -61,7 +61,7 @@ export default function FAQIndex() {
                   aria-expanded="true"
                   aria-controls={'collapse' + index}
                 >
-                  {index + 1} {'. '} {item.question}
+                  {index + 1} {'. '} {item.question_content}
                 </button>
               </h2>
               <div

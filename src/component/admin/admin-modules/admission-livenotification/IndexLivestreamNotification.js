@@ -116,7 +116,7 @@ export default function IndexLivestreamNotification() {
                                 <th>Tiêu đề</th>
                                 <th>Nội dung</th>
                                 <th>Thời gian livestream</th>
-                                <th>Thời lượng livestream</th>
+                                <th>Thời lượng livestream(phút)</th>
 
                                 <th>Thao tác</th>
                             </tr>
