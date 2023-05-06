@@ -37,7 +37,7 @@ export let endpoints = {
     'school': '/school/',
     'department': '/department/',
     'livestreamsnotification': '/livestreamsnotification/',
-    'admissionsquestion': '/admissionsquestion/',
+    'frequentlyquestions': '/frequentlyquestions/',
     'comment': '/comment/'
 }
 
