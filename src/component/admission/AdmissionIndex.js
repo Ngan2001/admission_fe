@@ -19,7 +19,6 @@ export default function AdmissionIndex() {
                 admissionsRes = res.data.results;
                 admissionsRes = admissionsRes.filter(item => item.admission_type == admissionType);
             }
-            console.log(admissionsRes);
             setAdmissions(admissionsRes);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));

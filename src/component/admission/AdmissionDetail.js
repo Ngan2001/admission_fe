@@ -9,7 +9,7 @@ import API, { endpoints } from '../../API';
 import { formatDateTimeResponse } from "../../Utils";
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
-
+import { Link } from "react-router-dom";
 
 export default function AdmissionDetail() {
 
@@ -67,12 +67,13 @@ export default function AdmissionDetail() {
     const [userId, setUserId] = useState("");
 
 
+    const loginToComment = () => {
+        localStorage.setItem('previousUrl', window.location.pathname)
+    }
 
     useEffect(() => {
         const loadComment = async () => {
-            console.log('in loadComment()');
             await API.get(endpoints["comment"] + `?admissionId=${admissionId}`).then(res => {
-                console.log(res);
 
                 let commentWithOriginalId = res.data.filter(item => item.origin_comment_id);
                 let commentWithoutOriginalId = res.data.filter(item => !item.origin_comment_id);
@@ -84,12 +85,10 @@ export default function AdmissionDetail() {
                     })
                 });
 
-                console.log(commentWithoutOriginalId);
 
                 let data = commentWithoutOriginalId.map(item => {
                     return { ...item, name: item.username, time: formatDateTimeResponse(item.created_date) }
                 });
-                console.log(data);
                 setCommentInDB(data);
             });
         }
@@ -155,7 +154,6 @@ export default function AdmissionDetail() {
 
     const sendCommentReply =  (ind) => {
         return async () => {
-            console.log(ind);
 
             let objComment2 = {
                 name: username,
@@ -168,11 +166,8 @@ export default function AdmissionDetail() {
             };
             const response = await API.post(endpoints["comment"], objComment2).then(res => {
                 setRefreshKey(oldKey => oldKey + 1);
-                console.log(res);
-                // objComment.time = formatDateTimeResponse(res.data.created_date);
     
                 setShowToast(true);
-                // setCommentInDB([...commentInDB, objComment]);
                 setCommentReply("");
     
                 setTimeout(() => {
@@ -198,7 +193,6 @@ export default function AdmissionDetail() {
             'origin_comment_id': null
         };
         const response = await API.post(endpoints["comment"], objComment).then(res => {
-            console.log(res);
             objComment.time = formatDateTimeResponse(res.data.created_date);
 
             setShowToast(true);
@@ -339,6 +333,14 @@ export default function AdmissionDetail() {
                                 </button>
                             </div>
                         </form>
+                    </div>
+                )}
+
+                {!isLogged && (
+                    <div className="card-footer">
+                        Bạn cần 
+                        <Link to="/login" onClick={loginToComment}> đăng nhập </Link>
+                         để có thể bình luận
                     </div>
                 )}
 

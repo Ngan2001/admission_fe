@@ -100,11 +100,11 @@ export default function LivestreamIndex() {
                                     <td>{lsn.content}</td>
                                     <td>{lsn.start_date}</td>
                                     <td>{lsn.time}</td>
-                                    <td class={ lsn.isTimeExceed ? "color-red" : "color-green"}>
+                                    <td className={ lsn.isTimeExceed ? "color-red" : "color-green"}>
                                         { lsn.isTimeExceed ? "Đã đóng live" : "Sắp phát live"}
                                     </td>
                                     <td>
-                                        <button type="button" className="btn btn-default mr-2" onClick={addQuestion(lsn.id)}>
+                                        <button className={ "btn mr-2 " + ( lsn.isTimeExceed ? "btn-danger" : "btn-success")} disabled={lsn.isTimeExceed} type="button" onClick={addQuestion(lsn.id)}>
                                             Đặt câu hỏi
                                         </button>
                                     </td>

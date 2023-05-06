@@ -33,12 +33,7 @@ export default function IndexQuestions() {
 
         let url = pageNum === 1 ? endpoints["frequentlyquestions"] : `${endpoints["frequentlyquestions"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-            // console.log(res);
-            console.log(res.data.results);
 
-            // res.data.results.forEach(item => {
-            //     item.date_answer = item.date_answer.toString().split("T")[0];
-            // })
             setQuestions(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));

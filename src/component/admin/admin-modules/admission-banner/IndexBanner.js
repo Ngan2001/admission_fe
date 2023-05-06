@@ -28,7 +28,6 @@ export default function IndexBanner() {
     const loadBanner = async () => {
         let url = pageNum === 1 ? endpoints["banner"] : `${endpoints["banner"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-            console.log(res);
             setBanners(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));

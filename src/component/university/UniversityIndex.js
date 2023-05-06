@@ -15,8 +15,6 @@ export default function UniversityIndex() {
 
     let url = pageNum === 1 ? endpoints["school"] : `${endpoints["school"]}?page=${pageNum}`;
     await API.get(url).then(res => {
-      // console.log(res);
-      console.log(res.data.results);
       setSchool(res.data.results);
 
       var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));

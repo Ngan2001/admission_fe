@@ -62,7 +62,6 @@ if (window.location.href.includes('/admin') && !window.location.href.includes('/
     }
 
     let isAdmin = JSON.parse(localStorage.getItem("is_superuser"));
-    console.log(isAdmin);
     if (!isAdmin) {
       window.location.href = '/admin-login';
     }

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Register from "./Register";
 import Login from "./Login";
 import { Outlet, Link } from "react-router-dom";
+import API, { endpoints } from "../../API";
+
 export default function Header() {
         const buttonCSS = {
             width: '200px',
@@ -20,6 +22,8 @@ export default function Header() {
         const [isLogged, setIsLogged] = useState(false);
         const [userAvatarURL, setUserAvatarURL] = useState("");
         const [username, setUsername] = useState("");
+        const [school, setSchool] = useState([]);
+        const [schoolLogo, setSchoolLogo] = useState("");
 
         useEffect(() => {
             let checkUserLogin = localStorage.getItem("isLogged");
@@ -34,16 +38,30 @@ export default function Header() {
             }
         }, []);
 
+        useEffect(() => {
+            loadSchool();
+        }, []);
+
         const logOut = () => {
             localStorage.clear();
             setIsLogged(false);
+        }
+
+        const loadSchool = async () => {
+            let url = endpoints["school"];
+            await API.get(url).then(res => {
+                if(res.data && res.data.results.length > 0) {
+                    setSchoolLogo(res.data.results[0].logo);
+                }
+            })
         }
 
         return (
             <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{ padding: 0 }}>
                 <div className="container-fluid" style={{ background: '#1150a0' }}>
                     <a className="navbar-brand" href="/">
-                        <img style={{ height: '90px', width: '120px' }} src="assets/images/school-logo.png" className="d-block w-100" alt="..." />
+                        <img style={{ height: '90px', width: '120px' }} src={schoolLogo ? schoolLogo : "assets/images/school-logo.png"} className="d-block w-100" alt="..." />
+                        {/* <img style={{ height: '90px', width: '120px' }} src="assets/images/school-logo.png" className="d-block w-100" alt="..." /> */}
                     </a>
                     <button
                         className="navbar-toggler"

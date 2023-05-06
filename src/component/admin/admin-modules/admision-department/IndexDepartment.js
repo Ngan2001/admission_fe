@@ -33,7 +33,6 @@ export default function IndexDepartment() {
     const loadDepartment = async () => {
         let url = pageNum === 1 ? endpoints["department"] : `${endpoints["department"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-            console.log(res);
             setDepartments(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));

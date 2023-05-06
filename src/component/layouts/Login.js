@@ -45,9 +45,7 @@ export default function Login() {
       "username": user,
       "password": pwd
     };
-    console.log('response');
     await API.post(endpoints["authenticate"], data).then(res => {
-      console.log(res);
       if (res && res.status == 200) {
         let token = res.data.access;
         localStorage.setItem("token", token);
@@ -66,7 +64,8 @@ export default function Login() {
                 setErrorMess("Bạn không có quyền vào trang này!");
               }
             } else {
-              nav("/");
+              let previousUrl = localStorage.getItem('previousUrl');
+              nav(previousUrl ? previousUrl : "/");
             }
           }
         )

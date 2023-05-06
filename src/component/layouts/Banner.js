@@ -16,9 +16,6 @@ export default function BannerIndex() {
 
         let url = pageNum === 1 ? endpoints["banner"] : `${endpoints["banner"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-          // console.log(res);
-          console.log(res.data.results);
-    
           setBanners(res.data.results);
     
           var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
@@ -42,10 +39,16 @@ export default function BannerIndex() {
             >
  
                 <div className="carousel-inner" style={{height:'475px'}}>
-                {banners.map(item => 
+                {(banners && banners.length > 0) && banners.map(item => 
                 <div className="carousel-item active" data-bs-interval={8000}>
                         <img  style={{height:'475px'}} src={item.image_url} className="d-block w-100" alt="..." />
-                    </div>)}
+                </div>)
+                }
+                {(!banners || banners.length ==0 ) && (
+                    <div className="carousel-item active" data-bs-interval={8000}>
+                        <img  style={{height:'475px'}} src="../../../assets/images/800px-Default_Banner.jpg" className="d-block w-100" alt="..." />
+                </div>
+                )} 
                     
                 
                     {/* <div className="carousel-item" data-bs-interval={2000}>

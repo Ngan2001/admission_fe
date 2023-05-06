@@ -31,7 +31,6 @@ export default function IndexSchool() {
     const loadSchool = async () => {
         let url = pageNum === 1 ? endpoints["school"] : `${endpoints["school"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-            console.log(res);
             setSchool(res.data.results);
 
             var n_loop = Math.ceil(Number(res.data.count) / Number(constantConfig.PAGESIZE));
@@ -95,9 +94,17 @@ export default function IndexSchool() {
             <h1> Thông tin về trường</h1>
             <div className="card">
                 <div className="card-header">
-                    <a href="/admin/school/create" type="button" className="btn btn-primary btn-block" style={{ width: '150px', float: 'right' }}>
-                        <i className="fa fa-plus"></i> Thêm mới
-                    </a>
+                    {(school && school.length > 0) && 
+                        
+                        <button type="button" disabled className="btn btn-default" style={{ width: '150px', float: 'right' }}>Thêm mới</button>
+                    }
+                    {(school && school.length == 0) && 
+                        <a href="/admin/school/create" type="button" aria-disabled={school && school.length > 0} className="btn btn-primary btn-block" style={{ width: '150px', float: 'right' }}>
+                            <i className="fa fa-plus"></i> Thêm mới
+                        </a>
+                    }
+
+                    
 
                 </div>
                 <div className="card-body">
@@ -130,33 +137,8 @@ export default function IndexSchool() {
                                 </tr>
                             )
                             }
-
-
                         </tbody>
                     </table>
-                </div>
-                <div className="card-footer clearfix">
-                    <ul className="pagination pagination-sm m-0 float-right">
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                «
-                            </a>
-                        </li>
-                        {totalPages.map(page => 
-                            <li className="page-item">
-                                <Link className={"page-link " + (pageNum == page ? 'link-active' : '')} to={ page == 1 ? `` : `/admin/school/?page=${page}`} onClick={onClickPage(page)}>
-                                            {page}
-                                </Link>
-                            </li>
-                            )
-                        }
-
-                        <li className="page-item">
-                            <a className="page-link" href="#">
-                                »
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <Outlet />

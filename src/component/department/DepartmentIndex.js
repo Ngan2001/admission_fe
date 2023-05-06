@@ -15,8 +15,6 @@ export default function DepartmentIndex () {
 
         let url = pageNum === 1 ? endpoints["department"] : `${endpoints["department"]}?page=${pageNum}`;
         await API.get(url).then(res => {
-          // console.log(res);
-          console.log(res.data.results);
     
           setDepartments(res.data.results);
     
